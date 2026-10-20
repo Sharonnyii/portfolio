@@ -1,6 +1,22 @@
 .focus-line{color:white;font-family:var(--mono,monospace);font-size:clamp(11px,1.2vw,15px);letter-spacing:.05em;text-shadow:0 2px 16px #191027;margin-bottom:22px}
 .jy-ch .chapter-skill{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.03em;border-top:1px solid #ffffff50;padding-top:12px}
 .campfire-preview{object-fit:cover;opacity:1}
+.pixel-controls{display:flex;align-items:center;gap:16px;margin-top:12px;font-family:var(--mono);font-size:10px;flex-wrap:wrap}
+.pixel-controls>div{display:flex;gap:2px;border:1px solid #fff4;border-radius:30px;padding:3px;background:#ffffff08}
+.pixel-controls button{color:inherit;cursor:pointer;border:1px solid transparent;background:transparent;border-radius:30px;padding:7px 12px;font:inherit}
+.pixel-controls button[aria-pressed=true]{background:#ffffff25;border-color:#fff5}
+.pixel-controls>.pixel-scatter{border-color:#fff4}
+.pixel-controls button:focus-visible{outline:2px solid white;outline-offset:3px}
+.editorial-reflection .pixel-word-field{display:block;width:min(100%,1100px);height:clamp(90px,12vw,170px);margin-top:35px}
+.pixel-word-field canvas{display:block;width:100%;height:100%}
+.gravity-letter{display:inline-block;transition:transform .85s cubic-bezier(.22,.8,.3,1),opacity .8s;transition-delay:var(--fall-delay,0ms)}
+.letters-falling .gravity-letter{transform:translate(var(--fall-x),var(--fall-y)) rotate(var(--fall-rotation));opacity:.55}
+.reflection-collect:focus-visible{outline:1px solid #fff7;outline-offset:12px}
+.proj{transition:opacity .6s ease}
+.proj .proj-in{transform:scale(.955);filter:blur(3px);transform-origin:50% 35%;transition:transform .6s cubic-bezier(.16,1,.3,1),filter .6s ease}
+.proj.on .proj-in{transform:scale(1);filter:blur(0)}
+.proj.is-closing .proj-in{transform:scale(1.04);filter:blur(4px)}
+@media(prefers-reduced-motion:reduce){.proj,.proj .proj-in{transition:none;transform:none!important;filter:none!important}.gravity-letter{transition:none}}
 section.seq{height:900vh}
 section.journey{height:520vh}
 body .cursor-orb{z-index:1002}
