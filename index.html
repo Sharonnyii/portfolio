@@ -690,12 +690,13 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
         <div class="sk-sticky">
           <div class="sk-eyebrow">Tools of the trade</div>
           <div class="prev-video">
-            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="A spiral reel of stills from previous work: VJ performance, Xing Yun stage concepts, Chao Feng print design, and the Federation Square screening"><source src="reel.webm.mp4" type="video/mp4"></video>
+            <video id="skillsReel" muted playsinline disablepictureinpicture preload="auto" poster="skills-reel-poster.jpg" aria-label="Scroll-controlled reel of visual, lighting and stage work"><source src="skills-reel.webm" type="video/webm"><source src="skills-reel.mp4" type="video/mp4"></video>
           </div>
           <div class="sk-it r" data-k="0"><h3>Touch<em>Designer</em></h3><p><b>Real-time visuals.</b> Audio-reactive and generative systems, built as living networks for projection and live performance.</p></div>
           <div class="sk-it l" data-k="1"><h3><em>Maya</em></h3><p><b>3D modelling.</b> Building stage volumes, props and spaces, so a set can be drawn and tested before it exists.</p></div>
           <div class="sk-it r" data-k="2"><h3>Quick<em>Show</em></h3><p><b>Light programming.</b> Cueing colour, movement and timing so light moves with the piece.</p></div>
           <div class="sk-it l" data-k="3"><h3>After <em>Effects</em></h3><p><b>Motion graphics.</b> 2 and 2.5D animation, layered depth and looping screen content.</p></div>
+          <div class="sk-it r" data-k="4"><h3>Resolume <em>Arena</em></h3><p><b>Projection mapping.</b> Mapping moving images onto surfaces and composing visuals for spatial experiences.</p></div>
         </div>
       </section>
 
@@ -1175,9 +1176,10 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   function skUpdate(){
     if(!sk) return;
     var r = sk.getBoundingClientRect(), tot = Math.max(sk.offsetHeight - window.innerHeight, 1), p = clamp(-r.top / tot, 0, 1), n = skItems.length;
+    if(window.updateSkillReel) window.updateSkillReel(p);
     skItems.forEach(function(el, i){
-      var c0 = (i + 0.5) / n, w = 0.5 / n * 1.15, v = clamp(1 - Math.abs(p - c0) / w, 0, 1);
-      v = Math.min(1, v * 1.6); v = v * v * (3 - 2 * v); if(reduce) v = 1;
+      var phase = clamp(p * n - i, 0, 1), enter = clamp(phase / 0.16, 0, 1), exit = clamp((phase - 0.86) / 0.14, 0, 1);
+      var v = enter*enter*(3-2*enter) * (1-exit*exit*(3-2*exit)); if(reduce) v = 1;
       el.style.setProperty('--c', v.toFixed(3));
     });
   }
@@ -2450,3 +2452,5 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <script src="lamp-titles.js"></script>
 
 <script src="reflection-interactions.js"></script>
+
+<script src="skills-reel.js"></script>
