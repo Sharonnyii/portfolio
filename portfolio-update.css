@@ -184,3 +184,6 @@ body .snd .eq i{transition:height .15s ease,opacity .15s ease}
 #work .work-atmosphere{z-index:-2;max-width:none;transform:scale(1.025)}
 #work .work-video-shade{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#05070c40,#05070c30 65%,#05070c90)}
 @media(max-width:900px){#work .work-atmosphere,#work .work-video-shade{position:absolute}}
+#work .work-atmosphere{z-index:0}
+#work .work-video-shade{z-index:1}
+#work .hx-head,#work .hx-track,#work .coverflow-controls{position:relative;z-index:2}
