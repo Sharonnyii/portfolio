@@ -695,6 +695,20 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       </section>
 
 
+      <!-- ================= PREVIOUS WORK ================= -->
+      <section class="prev sk" id="previous" aria-label="Software I work in">
+        <div class="sk-sticky">
+          <div class="sk-eyebrow">Tools of the trade</div>
+          <div class="prev-video">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="A spiral reel of stills from previous work: VJ performance, Xing Yun stage concepts, Chao Feng print design, and the Federation Square screening"><source src="reel.webm.mp4" type="video/mp4"></video>
+          </div>
+          <div class="sk-it r" data-k="0"><h3>Touch<em>Designer</em></h3><p><b>Real-time visuals.</b> Audio-reactive and generative systems, built as living networks for projection and live performance.</p></div>
+          <div class="sk-it l" data-k="1"><h3><em>Maya</em></h3><p><b>3D modelling.</b> Building stage volumes, props and spaces, so a set can be drawn and tested before it exists.</p></div>
+          <div class="sk-it r" data-k="2"><h3>Quick<em>Show</em></h3><p><b>Light programming.</b> Cueing colour, movement and timing so light moves with the piece.</p></div>
+          <div class="sk-it l" data-k="3"><h3>After <em>Effects</em></h3><p><b>Motion graphics.</b> 2 and 2.5D animation, layered depth and looping screen content.</p></div>
+        </div>
+      </section>
+
       <!-- ================= WORK ================= -->
       <section id="work" class="hx" aria-label="Selected work">
         <div class="hx-pin">
@@ -747,25 +761,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
           <div class="hx-rip" id="hxRip" aria-hidden="true"></div>
         </div>
       </section>
-      <section class="design-reflection" aria-label="What nourishes my practice">
-        <span class="eyebrow">What stays with me</span>
-        <p>Being moved. Finding <em>beauty.</em><br>Questioning what I see.</p>
-        <p class="reflection-note">Each experience deepens my sensitivity<br>and becomes part of how I design.</p>
-      </section>
 
-      <!-- ================= PREVIOUS WORK ================= -->
-      <section class="prev sk" id="previous" aria-label="Software I work in">
-        <div class="sk-sticky">
-          <div class="sk-eyebrow">Tools of the trade</div>
-          <div class="prev-video">
-            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="A spiral reel of stills from previous work: VJ performance, Xing Yun stage concepts, Chao Feng print design, and the Federation Square screening"><source src="reel.webm.mp4" type="video/mp4"></video>
-          </div>
-          <div class="sk-it r" data-k="0"><h3>Touch<em>Designer</em></h3><p><b>Real-time visuals.</b> Audio-reactive and generative systems, built as living networks for projection and live performance.</p></div>
-          <div class="sk-it l" data-k="1"><h3><em>Maya</em></h3><p><b>3D modelling.</b> Building stage volumes, props and spaces, so a set can be drawn and tested before it exists.</p></div>
-          <div class="sk-it r" data-k="2"><h3>Quick<em>Show</em></h3><p><b>Light programming.</b> Cueing colour, movement and timing so light moves with the piece.</p></div>
-          <div class="sk-it l" data-k="3"><h3>After <em>Effects</em></h3><p><b>Motion graphics.</b> 2 and 2.5D animation, layered depth and looping screen content.</p></div>
-        </div>
-      </section>
 
 
 
@@ -775,6 +771,12 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
         <div class="proj-in" id="projIn"></div>
       </div>
 
+
+      <section class="design-reflection" aria-label="What nourishes my practice">
+        <span class="eyebrow">What stays with me</span>
+        <p data-depth-words>Being moved. Finding <em>beauty.</em><br>Questioning what I see.</p>
+        <p class="reflection-note" data-depth-words data-delay="400">Each experience deepens my sensitivity<br>and becomes part of how I design.</p>
+      </section>
 
       <!-- ================= CONTACT ================= -->
       <footer id="contact" class="contact-scene">
@@ -1465,13 +1467,13 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     var c = t.closest('[data-cursor]');
     var wasArrow = orb.classList.contains('is-arrow');
     if(c && c.getAttribute('data-cursor') === 'arrow'){
-      orb.classList.add('is-arrow'); hsT = 2.3;
+      orb.classList.add('is-arrow'); hsT = 1.22;
       if(!wasArrow) drop(tx, ty, 4, 1.0);
     } else {
       orb.classList.remove('is-arrow');
-      if(c){ hsT = 1.8; if(wasArrow || hsT !== 1.8) drop(tx, ty, 4, 0.9); }
-      else if(t.closest('a, button')){ if(hsT !== 2.0) drop(tx, ty, 4, 1.0); hsT = 2.0; }
-      else if(t.closest('img, video')){ hsT = 1.5; }
+      if(c){ hsT = 1.18; if(wasArrow || hsT !== 1.18) drop(tx, ty, 4, 0.9); }
+      else if(t.closest('a, button')){ if(hsT !== 1.16) drop(tx, ty, 4, 1.0); hsT = 1.16; }
+      else if(t.closest('img, video')){ hsT = 1.08; }
       else { hsT = 1; }
     }
   });
@@ -1492,7 +1494,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     rx += (tx - rx) * (reduce ? 1 : 0.1); ry += (ty - ry) * (reduce ? 1 : 0.1);
     var vx = x - px, vy = y - py;
     var sp = Math.sqrt(vx*vx + vy*vy);
-    var st = reduce ? 0 : Math.min(sp / 22, 0.8);
+    var st = reduce ? 0 : Math.min(sp / 40, 0.22);
     if(sp > 0.6) ang = Math.atan2(vy, vx);
     hs += (hsT - hs) * 0.14;
     vis += ((shown ? 1 : 0) - vis) * 0.25;
@@ -2438,3 +2440,5 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 })();
 </script>
 
+
+<script src="depth-words.js"></script>
