@@ -18,7 +18,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400&family=Instrument+Serif:ital@0;1&family=Nunito:wght@800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="portfolio-update.css">
+<link rel="stylesheet" href="portfolio-update.css?v=20261021-layout2">
 <style>
   /* Layout concept: a lit stage in negative space — one column of "cue sheet" reads
      down the left edge (channel numbers, timecodes, running notes) while the work
@@ -672,7 +672,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <!-- ================= SEQUENCE ================= -->
       <section class="seq" id="seq" aria-label="Who I am, my perspective and my approach">
         <div class="seq-pin">
-          <video class="atmosphere-video intro-atmosphere" autoplay muted loop playsinline preload="metadata" poster="intro-atmosphere.jpg" aria-hidden="true"><source src="intro-atmosphere.mp4" type="video/mp4"></video>
+          <video class="atmosphere-video intro-atmosphere" autoplay muted loop playsinline preload="metadata" poster="intro-soft-light.jpg" aria-hidden="true"><source src="intro-soft-light.mp4" type="video/mp4"></video>
           <div class="intro-video-shade" aria-hidden="true"></div>
           <div class="seq-space" id="seqSpace"></div>
           <canvas class="seq-stars" id="seqStars" aria-hidden="true"></canvas>
@@ -705,8 +705,6 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       <!-- ================= WORK ================= -->
       <section id="work" class="hx" aria-label="Selected work">
         <div class="hx-pin">
-          <video class="atmosphere-video work-atmosphere" autoplay muted loop playsinline preload="metadata" poster="selected-work-atmosphere.jpg" aria-hidden="true"><source src="selected-work-atmosphere.mp4" type="video/mp4"></video>
-          <div class="work-video-shade" aria-hidden="true"></div>
           <div class="hx-head"><h2 class="lamp-title" data-lamp-text="selected work">Selected Work</h2></div>
           <div class="hx-track" id="hxTrack">
             <article class="hx-card" data-p="capitol">
@@ -762,7 +760,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 
       <!-- project page (opens over the site) -->
       <div class="proj" id="proj" role="dialog" aria-modal="true" aria-label="Project" hidden data-lenis-prevent>
-        <div class="project-atmosphere" aria-hidden="true"><video class="atmosphere-video" autoplay muted loop playsinline preload="metadata" poster="project-atmosphere.jpg"><source src="project-atmosphere.mp4" type="video/mp4"></video></div>
+        <div class="project-atmosphere" aria-hidden="true"><video class="atmosphere-video" autoplay muted loop playsinline preload="metadata" poster="project-soft-colour.jpg"><source src="project-soft-colour.mp4" type="video/mp4"></video></div>
         <button class="proj-close" id="projClose" type="button" aria-label="Close project"><span aria-hidden="true">&times;</span></button>
         <div class="proj-in" id="projIn"></div>
       </div>
@@ -1305,7 +1303,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     proj.classList.toggle('is-capitol', id === 'capitol');
     lastFocus = document.activeElement;
     var html = '<h2 class="proj-title">' + d.title + '</h2>';
-    var text = '<div class="proj-text">' + d.body.map(function(t){ return '<p>' + t + '</p>'; }).join('') + '<dl class="proj-facts">' + d.facts.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl>' + (d.vid ? '<a class="linkout" href="' + d.vid.url + '" target="_blank" rel="noopener">' + videoCTA(d.vid) + '</a>' : '') + '</div>';
+    var text = '<div class="proj-text">' + '<div class="project-prose">' + d.body.map(function(t,i){ return '<p class="' + (i === 0 ? 'project-lead' : 'project-detail') + '">' + t + '</p>'; }).join('') + '</div>' + '<dl class="proj-facts">' + d.facts.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl>' + (d.vid ? '<a class="linkout" href="' + d.vid.url + '" target="_blank" rel="noopener">' + videoCTA(d.vid) + '</a>' : '') + '</div>';
     if(d.vid) html += '<div class="proj-grid">' + mediaHTML(d.vid) + text + '</div>';
     else html += '<div class="proj-grid' + ((d.imgs && d.imgs[0][2] === 'solo') ? '' : ' solo') + '">' + (d.imgs && d.imgs[0][2] === 'solo' ? '<div class="proj-media" style="aspect-ratio:902/1280;max-width:560px"><img class="pp-img" style="object-fit:contain;background:#f4f1ea" src="' + d.imgs[0][0] + '" alt="' + d.imgs[0][1] + '"></div>' : '') + text + '</div>';
     if(d.imgs && d.imgs[0][2] !== 'solo') html += '<div class="proj-gallery">' + d.imgs.map(function(m){ return '<img class="' + (m[2] === 'wide' ? 'wide' : '') + '" src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div>';

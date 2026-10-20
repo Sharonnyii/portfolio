@@ -187,3 +187,20 @@ body .snd .eq i{transition:height .15s ease,opacity .15s ease}
 #work .work-atmosphere{z-index:0}
 #work .work-video-shade{z-index:1}
 #work .hx-head,#work .hx-track,#work .coverflow-controls{position:relative;z-index:2}
+
+/* Feather the moving introduction into the surrounding dark atmosphere. */
+#seq .intro-atmosphere{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 78%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 20%,#000 78%,transparent)}
+#seq .intro-video-shade{background:linear-gradient(to bottom,rgba(5,7,12,.55),rgba(5,7,12,.12) 30%,rgba(5,7,12,.18) 70%,rgba(5,7,12,.65))}
+/* Editorial project introductions: generous measure, serif lead and quiet credits. */
+#proj .proj-grid{display:block}
+#proj .proj-grid>.proj-media{margin:0 auto 70px}
+#proj .proj-text,#proj.is-capitol .proj-text{max-width:1160px;margin:0 auto;padding:45px clamp(20px,4vw,65px) 65px}
+#proj .project-prose{max-width:960px}
+#proj .project-prose .project-lead{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(29px,3.3vw,50px);line-height:1.18;letter-spacing:-.025em;text-wrap:pretty;margin:0 0 40px;font-weight:400}
+#proj .project-prose .project-detail{font-family:'Instrument Sans',sans-serif;font-size:clamp(16px,1.3vw,20px);line-height:1.75;letter-spacing:0;max-width:650px;margin:0 0 30px auto;color:#ece7f3d9}
+#proj .proj-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;border-top:1px solid #ffffff40;margin:55px 0 32px;padding-top:24px}
+#proj .proj-facts div{display:block;border:0;padding:0;text-transform:none;letter-spacing:0}
+#proj .proj-facts dt{font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px;color:#d9d2e3a6}
+#proj .proj-facts dd{text-align:left;font-family:'Instrument Sans',sans-serif;font-size:14px;line-height:1.65;color:#f4f0f9}
+#proj .proj-text>.linkout{border:0;border-bottom:1px solid #ffffff70;padding:12px 0;background:transparent;font-size:11px;letter-spacing:.06em}
+@media(max-width:700px){#proj .proj-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}#proj .proj-text,#proj.is-capitol .proj-text{padding:20px 24px 45px}#proj .proj-grid>.proj-media{margin-bottom:35px}}
