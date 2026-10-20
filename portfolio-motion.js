@@ -3,21 +3,6 @@
  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
  function observeRun(el,draw){var raf=0,on=false,last=0;function frame(t){raf=0;if(!on||document.hidden)return;if(t-last>=32||reduced){draw(t);last=t;}if(!reduced)raf=requestAnimationFrame(frame);}function run(){if(on&&!document.hidden&&!raf)raf=requestAnimationFrame(frame);else if((!on||document.hidden)&&raf){cancelAnimationFrame(raf);raf=0;}}new IntersectionObserver(function(es){on=es[0].isIntersecting;run();},{rootMargin:'60px'}).observe(el);document.addEventListener('visibilitychange',run);}
- // Pixel flow samples the actual video, retaining its own colours and glow.
- var video=document.getElementById('contactVideo'),flow=document.getElementById('lightLeakFlow');
- if(video&&flow){
-  var ctx=flow.getContext('2d'),sample=document.createElement('canvas'),mask=document.createElement('canvas'),sc=sample.getContext('2d'),mc=mask.getContext('2d');
-  var cells=[],w=0,h=0,step=9,mx=-999,my=-999;
-  function sizeFlow(){var r=flow.getBoundingClientRect();w=Math.round(r.width);h=Math.round(r.height);if(!w||!h)return;step=Math.max(innerWidth<700?10:8,Math.sqrt(w*h/10500));flow.width=mask.width=w;flow.height=mask.height=h;sample.width=Math.ceil(w/step);sample.height=Math.ceil(h/step);cells=[];for(var y=step/2;y<h;y+=step)for(var x=step/2;x<w;x+=step)cells.push({x:x,y:y,dx:0,dy:0});}
-  sizeFlow();addEventListener('resize',sizeFlow);
-  flow.parentNode.addEventListener('pointermove',function(e){var r=flow.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;},{passive:true});flow.parentNode.addEventListener('pointerleave',function(){mx=my=-999;});
-  if(ctx&&sc&&mc)observeRun(flow,function(){
-   if(video.readyState<2||!w||!h)return;
-   var va=video.videoWidth/video.videoHeight,ca=w/h,sx=0,sy=0,sw=video.videoWidth,sh=video.videoHeight;if(va>ca){sw=sh*ca;sx=(video.videoWidth-sw)/2;}else{sh=sw/ca;sy=(video.videoHeight-sh)/2;}
-   sc.drawImage(video,sx,sy,sw,sh,0,0,sample.width,sample.height);ctx.globalCompositeOperation='source-over';ctx.clearRect(0,0,w,h);ctx.imageSmoothingEnabled=false;ctx.drawImage(sample,0,0,w,h);
-   mc.clearRect(0,0,w,h);mc.fillStyle='#fff';mc.beginPath();cells.forEach(function(c){var dx=c.x-mx,dy=c.y-my,d=Math.hypot(dx,dy),f=!reduced&&d<150?(1-d/150)*22:0,tx=d?dx/d*f:0,ty=d?dy/d*f:0;c.dx+=(tx-c.dx)*.18;c.dy+=(ty-c.dy)*.18;var x=c.x+c.dx,y=c.y+c.dy;mc.moveTo(x+step*.24,y);mc.arc(x,y,step*.24,0,Math.PI*2);});mc.fill();ctx.globalCompositeOperation='destination-in';ctx.drawImage(mask,0,0);ctx.globalCompositeOperation='source-over';flow.classList.add('flow-ready');
-  });
- }
  // A muted duplicate of the SAME Vimeo movie provides real frame-matched ambient light.
  window.setupCapitolAmbient=function(frame,player){
   var holder=frame.parentNode;holder.classList.add('capitol-ambient');var ambient=document.createElement('iframe');ambient.className='capitol-ambient-frame';ambient.title='';ambient.tabIndex=-1;ambient.setAttribute('aria-hidden','true');ambient.allow='autoplay';ambient.src='https://player.vimeo.com/video/1235462150?background=1&autoplay=0&muted=1&controls=0&dnt=1';holder.prepend(ambient);
