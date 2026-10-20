@@ -11,7 +11,9 @@ Single-page portfolio. Plain HTML/CSS/JS, no build step.
 ## Files
 - `index.html` — the whole site
 - `reel.webm` — **put your original `animo-spiral-stream-900p.webm` here and rename it `reel.webm`** (not included in this zip because of the download size limit)
-- `void.webm` — black-hole background (1080p)
+- `hero-bg.webm` — cover background video (iridescent film, seamless loop)
+- `aquarium.mp3` — water ambience for the Sound button
+- `pavilion.glb` — Chinese Pavilion 3D model (Draco-compressed from the 24 MB original)
 - `leak.webm` — light leak behind the Instagram link
 - `cf-*.jpg`, `fedsquare-*.jpg` — project images
 - `sharonnyii.png`, `sharonnyii-solid.png` — name artwork (chrome image + white silhouette)
