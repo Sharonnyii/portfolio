@@ -18,7 +18,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400&family=Instrument+Serif:ital@0;1&family=Nunito:wght@800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="portfolio-update.css?v=20261021-layout2">
+<link rel="stylesheet" href="portfolio-update.css?v=20261021-flow3">
 <style>
   /* Layout concept: a lit stage in negative space — one column of "cue sheet" reads
      down the left edge (channel numbers, timecodes, running notes) while the work
@@ -767,6 +767,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 
 
       <section class="design-reflection editorial-reflection" aria-label="What nourishes my practice">
+        <div class="diamond-shimmers" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></div>
         <p data-depth-words><span class="reflection-line"><em>Being</em> moved.</span><span class="reflection-line reflection-collect">Collecting pieces<br>from each experience.</span><span class="reflection-line">Finding <em>beauty.</em></span><span class="reflection-line reflection-assimilation">Ubiquitous assimilation.</span></p>
       </section>
 
@@ -1279,7 +1280,8 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       facts: [['Venue', 'Federation Square, Melbourne'], ['Techniques', '3D modelling, 2.5D animation'], ['Format', 'Endless-loop screening']],
       imgs: [['fedsquare-02.jpg', 'Digitally composited statue garden artwork', 1], ['fedsquare-01.jpg', 'Iridescent glass sphere composition', 1]] },
     model: { kick: 'Environment design', title: '3D <em>Modelling</em>',
-      body: ['A glass pavilion garden built in 3D: a lattice screen with a cloud-shaped window, a pavilion resting on a lantern-like stand, flowers, light orbs and grass &mdash; rendered in iridescent glass and colour.', 'Description to be updated.'],
+      sketchfab: '19614851641a48b6b02ded05f9dba9cb',
+      body: ['This Chinese diorama explores the concept of cultural synthesis. It reflects an ongoing effort to fuse my core cultural identity, deeply shaped by the harmonies of a Chinese orchestra, with the modern digital elements that surround and define me.'],
       facts: [['Tool', 'Maya'], ['Format', '3D environment']],
       imgs: [['model-1.jpg', 'Glass pavilion garden, wide view', 'wide'], ['model-2.jpg', 'Pavilion and cloud window, close view', 'wide'], ['model-3.jpg', 'Pavilion on its stand, closer view', 'wide'], ['model-4.jpg', 'Glass lantern stand with light orbs'], ['model-5.jpg', 'Pavilion interior with brick steps'], ['model-6.jpg', 'Pavilion front in glass render']] },
     cf: { kick: 'Graphic Designer', title: 'Chao Feng <em>Concert</em>',
@@ -1304,7 +1306,8 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     lastFocus = document.activeElement;
     var html = '<h2 class="proj-title">' + d.title + '</h2>';
     var text = '<div class="proj-text">' + '<div class="project-prose">' + d.body.map(function(t,i){ return '<p class="' + (i === 0 ? 'project-lead' : 'project-detail') + '">' + t + '</p>'; }).join('') + '</div>' + '<dl class="proj-facts">' + d.facts.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl>' + (d.vid ? '<a class="linkout" href="' + d.vid.url + '" target="_blank" rel="noopener">' + videoCTA(d.vid) + '</a>' : '') + '</div>';
-    if(d.vid) html += '<div class="proj-grid">' + mediaHTML(d.vid) + text + '</div>';
+    if(d.sketchfab) html += '<div class="project-model-viewer"><iframe title="Chinese Pavilion — interactive 3D model" src="https://sketchfab.com/models/' + d.sketchfab + '/embed?autostart=1&amp;autospin=0&amp;animation_autoplay=0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen></iframe></div><p class="model-attribution"><a href="https://sketchfab.com/3d-models/' + d.sketchfab + '" target="_blank" rel="noopener">Chinese Pavilion by sharonnyii on Sketchfab ↗</a></p><div class="proj-grid solo">' + text + '</div>';
+    else if(d.vid) html += '<div class="proj-grid">' + mediaHTML(d.vid) + text + '</div>';
     else html += '<div class="proj-grid' + ((d.imgs && d.imgs[0][2] === 'solo') ? '' : ' solo') + '">' + (d.imgs && d.imgs[0][2] === 'solo' ? '<div class="proj-media" style="aspect-ratio:902/1280;max-width:560px"><img class="pp-img" style="object-fit:contain;background:#f4f1ea" src="' + d.imgs[0][0] + '" alt="' + d.imgs[0][1] + '"></div>' : '') + text + '</div>';
     if(d.imgs && d.imgs[0][2] !== 'solo') html += '<div class="proj-gallery">' + d.imgs.map(function(m){ return '<img class="' + (m[2] === 'wide' ? 'wide' : '') + '" src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div>';
     if(d.behind) html += '<section class="project-bts" aria-label="Behind the scenes"><h3>Behind the Scenes</h3><div class="bts-grid">' + d.behind.map(function(m){ return '<img src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div></section>';

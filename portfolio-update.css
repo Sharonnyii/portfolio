@@ -208,3 +208,20 @@ body .snd .eq i{transition:height .15s ease,opacity .15s ease}
 /* Direct pointer tracking; composite moving cursor layers separately. */
 body .cursor-orb,body .cursor-ring,body .cursor-glow,body .cursor-drop{will-change:transform;transition:none}
 body .orb-body{-webkit-backdrop-filter:none;backdrop-filter:none}
+
+/* Fade the complete atmosphere layer, including light effects, across section seams. */
+#seq .seq-pin{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 83%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 18%,#000 83%,transparent)}
+#seq{margin-top:-18vh}
+#contact.contact-scene{margin-top:-22vh;padding-top:calc(22vh + 40px);background:transparent;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 24%);mask-image:linear-gradient(to bottom,transparent,#000 24%)}
+.design-reflection{z-index:1}
+.design-reflection>p{position:relative;z-index:2}
+.project-model-viewer{width:100%;aspect-ratio:16/10;min-height:380px;margin:0 auto;background:#11121a;border:0;overflow:hidden}
+.project-model-viewer iframe{width:100%;height:100%;border:0;display:block}
+#proj .model-attribution{font-size:12px;text-align:right;margin:12px 0 35px;color:#e4def0aa}
+#proj .model-attribution a{color:inherit;text-decoration:none}
+.diamond-shimmers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.diamond-shimmers i{position:absolute;left:calc(9% + var(--i)*11%);top:calc(14% + mod(var(--i),3)*25%);width:14px;height:26px;background:radial-gradient(ellipse,#fff 0%,#f2dfff 22%,#c8dfff88 45%,transparent 70%);clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);filter:drop-shadow(0 0 7px #e8dbff);animation:diamond-shimmer 4.8s ease-in-out infinite;animation-delay:calc(var(--i)*-.63s);opacity:0}
+.diamond-shimmers i:nth-child(3n+1){top:22%}.diamond-shimmers i:nth-child(3n+2){top:53%}.diamond-shimmers i:nth-child(3n){top:78%}
+@keyframes diamond-shimmer{0%,65%,100%{opacity:0;transform:scale(.4) rotate(-12deg)}78%{opacity:.85;transform:scale(1.15) rotate(0deg)}90%{opacity:.2;transform:scale(.7) rotate(12deg)}}
+@media(prefers-reduced-motion:reduce){.diamond-shimmers i{animation:none;opacity:.2}}
+@media(max-width:700px){.project-model-viewer{aspect-ratio:4/5;min-height:340px}}
