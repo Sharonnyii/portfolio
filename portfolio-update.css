@@ -1,6 +1,28 @@
 .focus-line{color:white;font-family:var(--mono,monospace);font-size:clamp(11px,1.2vw,15px);letter-spacing:.05em;text-shadow:0 2px 16px #191027;margin-bottom:22px}
 .jy-ch .chapter-skill{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.03em;border-top:1px solid #ffffff50;padding-top:12px}
 .campfire-preview{object-fit:cover;opacity:1}
+section.seq{height:900vh}
+section.journey{height:520vh}
+body .cursor-orb{z-index:1002}
+body .cursor-ring{z-index:1001}
+body .cursor-drop{z-index:1000}
+body .cursor-glow{z-index:999}
+body .orb-body{backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.has-orb iframe{cursor:auto!important}
+.cursor-over-player .cursor-orb,.cursor-over-player .cursor-ring,.cursor-over-player .cursor-glow,.cursor-over-player .cursor-drop{opacity:0!important}
+.lamp-title{position:relative;width:100%;aspect-ratio:var(--lamp-ratio,77/9);line-height:1}
+.lamp-title canvas{display:block;width:100%;height:100%;filter:drop-shadow(0 0 8px #b4c4ff55)}
+.hx-head .lamp-title{width:min(80vw,1050px);margin:0;font-size:clamp(40px,7vw,100px)}
+.proj.is-capitol .proj-in{max-width:none;padding-inline:0}
+.proj.is-capitol .proj-kicker,.proj.is-capitol .proj-title{margin-left:clamp(20px,5vw,64px);margin-right:clamp(20px,5vw,64px)}
+.proj.is-capitol .proj-title.lamp-title{width:calc(100% - clamp(40px,10vw,128px));height:auto;aspect-ratio:var(--lamp-ratio);margin-bottom:40px}
+.proj.is-capitol .proj-grid{display:block}
+.proj.is-capitol .proj-media{width:100%;border-radius:0;aspect-ratio:16/9}
+.proj.is-capitol .proj-text{max-width:1100px;margin:0 auto;padding:60px clamp(24px,6vw,90px)}
+.proj.is-capitol #projFrame,.proj.is-capitol .pp{border-radius:0}
+body .proj-close{width:44px;height:44px;display:grid;place-items:center;padding:0;font:300 30px/1 Arial,sans-serif}
+@media(prefers-reduced-motion:reduce){section.seq{height:auto}section.journey{height:auto}}
+@media(prefers-reduced-motion:reduce){.journey .jy-sticky{height:auto;position:relative;padding:60px 0}.journey .jy-ch{position:relative;left:auto;bottom:auto;opacity:1!important;transform:none;margin:40px auto}.journey .jy-bar{display:none}}
 #lightLeakFlow{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0;mix-blend-mode:screen;transition:opacity .8s}
 #lightLeakFlow.flow-ready{opacity:.8}
 .contact-background-video{filter:none}
