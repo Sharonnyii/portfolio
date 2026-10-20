@@ -626,20 +626,7 @@
 <div class="wrap">
   <div class="stage">
     <main>
-<section class="light-prologue" id="light-prologue" aria-label="Lighting and scenography introduction">
-  <div class="light-prologue-pin">
-    <div class="light-beam beam-one" aria-hidden="true"></div><div class="light-beam beam-two" aria-hidden="true"></div>
-    <canvas id="lightSnow" aria-hidden="true"></canvas>
-    <div class="prologue-meta"><span>Sharon Yii</span><span>Melbourne · Kuala Lumpur</span></div>
-    <div class="prologue-copy"><p class="prologue-label">Lighting design &amp; scenography</p>
-      <h2>First, <em>light.</em><br>Then, a world.</h2>
-      <p class="prologue-intent">I explore how light shapes space, holds emotion<br class="desktop-break"> and invites us into an experience.</p>
-      <a class="prologue-work" href="#work">Explore selected work ↗</a>
-    </div>
-    <div class="prologue-bottom"><span>Light · Space · Presence</span><a href="#top">Scroll into the atmosphere ↓</a></div>
-  </div>
-</section>
-      <!-- ================= HERO ================= -->
+<!-- ================= HERO ================= -->
       <section id="top" class="hero">
         <div class="hero-top">
           <span>Melbourne, VIC &nbsp;·&nbsp; Kuala Lumpur, MY</span>
@@ -706,11 +693,11 @@
               <div class="hx-meta"><span class="hx-n">RMIT Capitol Theatre</span><h3>Lighting <em>Programming</em></h3><span class="hx-sub">Immersive lighting installation, Melbourne</span></div>
             </article>
             <article class="hx-card" data-p="lib">
-              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Interactive Installation" data-cursor="view">
+              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Beyond the Flame, Digital Campfire" data-cursor="view">
                 <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><img class="hx-fill campfire-cover" src="campfire-01.jpg" alt="Digital Interactive Campfire at RMIT Library" loading="lazy"><img class="hx-fill hx-alt" src="campfire-02.jpg" alt="Another view of the RMIT Library campfire installation" loading="lazy"><span class="hx-tag">Click to open</span></div>
+                <div class="hx-frame"><video class="hx-vid campfire-preview" data-kind="local" data-src="campfire-preview.mp4" poster="campfire-01.jpg" muted loop playsinline preload="none" aria-label="Beyond the Flame: installation preview, 0:55 to 1:03"></video><span class="hx-tag">Click to open</span></div>
               </div>
-              <div class="hx-meta"><span class="hx-n">RMIT Library</span><h3>Digital <em>Campfire</em></h3><span class="hx-sub">An invitation to remember, connect and let go</span></div>
+              <div class="hx-meta"><span class="hx-n">RMIT Library</span><h3>Beyond the <em>Flame</em></h3><span class="hx-sub">An invitation to remember, connect and let go</span></div>
             </article>
             <article class="hx-card" data-p="model">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: 3D Modelling" data-cursor="view">
@@ -1210,7 +1197,14 @@
   function startPreview(f){
     if(f.__on){ f.__play && f.__play(); return; } f.__on = true;
     var id = f.getAttribute('data-id');
-    if(f.getAttribute('data-kind') === 'vimeo'){
+    if(f.getAttribute('data-kind') === 'local'){
+      f.muted = true;
+      f.src = f.getAttribute('data-src');
+      f.addEventListener('playing', function(){ f.classList.add('ready'); });
+      f.__play = function(){ var promise = f.play(); if(promise) promise.catch(function(){}); };
+      f.__pause = function(){ f.pause(); };
+      f.__play();
+    } else if(f.getAttribute('data-kind') === 'vimeo'){
       f.src = 'https://player.vimeo.com/video/' + id + '?background=1&autoplay=1&muted=1&loop=0&controls=0&dnt=1#t=60s';
       loadVimeoSDK(function(){ try{
         var pl = new Vimeo.Player(f);
@@ -1253,7 +1247,8 @@
       body: ['Responsible for visual design and sound design for an immersive VJ performance exploring the relationship between contemporary digital media and Chinese cultural elements &mdash; using TouchDesigner, a sound synthesizer and live instrument playing, with 3D modelling in Maya.'],
       facts: [['Role', 'Visual &amp; sound design'], ['Tools', 'TouchDesigner, Maya, synthesizer'], ['Format', 'Live VJ performance']],
       vid: { kind: 'yt', id: 'O43imufUP-0', url: 'https://www.youtube.com/watch?v=O43imufUP-0', poster: 'https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg', cta: 'Watch on YouTube' } },
-    lib: { kick: 'RMIT Library · Interactive installation', title: 'Digital <em>Campfire</em>',
+    lib: { kick: 'RMIT Library · Interactive installation', title: 'Beyond the <em>Flame</em>',
+      vid: { kind: 'yt', id: 'HidQfL_VdBo', url: 'https://youtu.be/HidQfL_VdBo', poster: 'campfire-01.jpg', cta: 'Watch full film on YouTube' },
       body: ['An invitation to pause, remember and let go. Created for RMIT Library, this digital interactive campfire invites visitors to write a message to someone they love or miss, or put a worry into words and symbolically burn it away.', 'The experience begins with discovery: the first person to encounter the installation ignites the campfire. Their presence turns an unlit installation into a shared gathering point.', 'My contribution connected the visual and physical experience: I created the real-time campfire visuals in TouchDesigner, worked with PIR motion detection and ultrasonic sensing using Arduino IDE, synchronised the LED strip, and contributed to the installation setup.', 'This project brings together my interests in lighting and scenography: using responsive light and a familiar gathering ritual to give a space an emotional purpose.'],
       facts: [['Context', 'Created for RMIT Library'], ['Contribution', 'Real-time visuals, sensing, LED synchronisation & setup'], ['Tools', 'TouchDesigner, Arduino IDE, PIR & ultrasonic sensors'], ['Format', 'Digital interactive installation']],
       imgs: [['campfire-01.jpg', 'Digital Interactive Campfire at RMIT Library', 'wide'], ['campfire-02.jpg', 'The campfire installation in its library setting', 'wide']] },
@@ -2023,8 +2018,7 @@
   function journeyP(){
     if(!journeyEl) return Math.min(Math.max(window.scrollY / (window.innerHeight * 0.95), 0), 1);
     var r = journeyEl.getBoundingClientRect(), top = r.top + window.scrollY, T = top + r.height - window.innerHeight;
-    var introH = document.getElementById("light-prologue").offsetHeight;
-    return Math.min(Math.max((window.scrollY - introH) / Math.max(T - introH, 1), 0), 1);
+    return Math.min(Math.max(window.scrollY / Math.max(T, 1), 0), 1);
   }
   // keyframes along the scroll: x (fraction of aspect), y, size multiplier, extra yaw, extra pitch
   var KF = [[0, 0.84, -0.36, 1.45, 0.00, 0.22, 0.00, 24], [0.14, 0.76, -0.22, 1.85, 0.32, 0.16, 0.02, 26], [0.30, 0.58, -0.08, 1.25, -0.28, 0.18, 0.00, 20], [0.48, 0.42, 0.00, 2.35, 0.22, 0.14, 0.00, 24], [0.62, 0.30, 0.00, 3.10, -0.05, 0.12, 0.00, 26], [0.78, 0.10, 0.00, 5.80, 0.00, 0.08, 0.0, 24], [0.90, 0.00, 0.00, 12.0, 0.00, 0.05, 0.0, 24], [1.0, 0.0, 0.00, 20.0, 0.00, 0.0, 0.0, 24]];
@@ -2402,8 +2396,6 @@
   }
   function onScroll(){
     var o = journeyEl ? Math.min(Math.max((1 - journeyP()) / 0.08, 0), 1) : Math.min(Math.max(1 - window.scrollY / (window.innerHeight * 0.85), 0), 1);
-    var introH = document.getElementById("light-prologue").offsetHeight;
-    o *= Math.min(Math.max((window.scrollY - introH + window.innerHeight) / (window.innerHeight * 0.5), 0), 1);
     cv.style.setProperty('--vo', o.toFixed(3));
     visible = o > 0.002; A.vis = o;
     if(typeof vid !== 'undefined'){ if(visible && vid.paused && !document.hidden) vidStart(); else if(!visible && !vid.paused) vid.pause(); }
@@ -2416,6 +2408,3 @@
   window.__heroGlass = { frame: frame };
 })();
 </script>
-
-
-<script src="portfolio-update.js"></script>

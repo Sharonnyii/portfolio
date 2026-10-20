@@ -1,21 +1,3 @@
-.light-prologue{position:relative;height:180vh;margin-inline:calc(50% - 50vw);width:100vw;color:#f5f0ff;z-index:5;background:#090912}
-.light-prologue-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:radial-gradient(ellipse at 76% 65%,#302b454d,transparent 60%),#090912;isolation:isolate}
-.light-prologue-pin::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#d9d2f3,transparent 65%);opacity:var(--wash,0);pointer-events:none;z-index:3}
-.light-beam{position:absolute;top:-35%;height:160%;width:75%;pointer-events:none;filter:blur(22px);opacity:.65;transform-origin:50% 0}
-.beam-one{left:20%;background:linear-gradient(100deg,transparent 33%,#e1e6ff24 45%,#f0f6ff8c 49%,#b9d9ff19 54%,transparent 65%);transform:rotate(32deg)}
-.beam-two{right:-25%;background:linear-gradient(100deg,transparent 35%,#ad96d526 46%,#ead2fe55 50%,transparent 62%);transform:rotate(-30deg)}
-#lightSnow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.prologue-meta,.prologue-bottom{position:absolute;left:clamp(24px,5vw,80px);right:clamp(24px,5vw,80px);display:flex;justify-content:space-between;gap:20px;font-family:var(--mono,monospace);font-size:11px;letter-spacing:.08em;z-index:2}
-.prologue-meta{top:35px}.prologue-bottom{bottom:34px;color:#d2c9df}.prologue-bottom a{text-decoration:none;color:inherit}
-.prologue-copy{position:absolute;top:50%;left:clamp(24px,9vw,150px);transform:translateY(calc(-50% - var(--lift,0px)));z-index:2;opacity:var(--copy,1)}
-.prologue-label{font-family:var(--mono,monospace);font-size:11px;text-transform:uppercase;letter-spacing:.19em;color:#dfcee9;margin:0 0 28px}
-.prologue-copy h2{font-family:'Unbounded',sans-serif;font-size:clamp(38px,6.8vw,104px);font-weight:300;line-height:1.08;letter-spacing:-.045em;margin:0;color:#f6f1ff}
-.prologue-copy h2 em{font-family:'Instrument Serif',serif;font-weight:400;color:#e2d8f7}
-.prologue-intent{font-size:clamp(14px,1.3vw,18px);line-height:1.7;color:#c8c1d5;margin:28px 0 24px;max-width:470px}
-.prologue-work{display:inline-block;font-size:12px;letter-spacing:.04em;color:#f1eafa;text-decoration:none;padding:10px 0;border-bottom:1px solid #bcb1ca88}
-.prologue-work:focus-visible,.prologue-bottom a:focus-visible{outline:2px solid #fff;outline-offset:6px}
 .focus-line{color:white;font-family:var(--mono,monospace);font-size:clamp(11px,1.2vw,15px);letter-spacing:.05em;text-shadow:0 2px 16px #191027;margin-bottom:22px}
 .jy-ch .chapter-skill{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.03em;border-top:1px solid #ffffff50;padding-top:12px}
-.campfire-cover{object-position:center}
-@media(max-width:650px){.prologue-copy{left:24px;right:24px}.prologue-meta{font-size:9px}.prologue-bottom{font-size:9px;flex-direction:column;gap:12px}.desktop-break{display:none}.prologue-copy h2{font-size:clamp(37px,10vw,64px)}.prologue-intent{max-width:310px}.prologue-label{font-size:10px}.light-prologue{height:155vh}}
-@media(prefers-reduced-motion:reduce){.light-prologue{height:100svh}.light-beam{filter:blur(12px)}}
+.campfire-preview{object-fit:cover;opacity:1}
