@@ -757,6 +757,7 @@
 
       <!-- ================= CONTACT ================= -->
       <footer id="contact" class="contact-scene">
+        <video class="contact-background-video" id="contactVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="leak.webm" type="video/webm"></video>
         <canvas id="contactGlass" aria-hidden="true"></canvas>
         <div class="contact-shade" aria-hidden="true"></div>
         <div class="contact-top"><span>Sharon Yii</span><a href="#top">Back to top ↗</a></div>
@@ -765,7 +766,7 @@
           <a class="contact-email" href="mailto:sharonyii0924@gmail.com">sharonyii0924@gmail.com</a>
           <button class="copybtn" id="copyEmail" type="button">Copy email</button>
         </div>
-        <div class="contact-bottom"><div><span>Lighting design &amp; scenography</span><span>Melbourne · Kuala Lumpur</span></div><a href="https://www.instagram.com/sharonnyii/" target="_blank" rel="noopener">Instagram ↗</a></div>
+        <div class="contact-bottom"><div><span>Lighting design &amp; scenography</span><span>Melbourne · Kuala Lumpur</span></div><nav class="contact-socials" aria-label="Social links"><a href="https://www.instagram.com/sharonnyii/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a></nav></div>
       </footer>
     </main>
   </div>
@@ -1325,10 +1326,10 @@
   if(!ctx) return;
 
   // ----- ripple field -----
-  var CELL = 4, GW = 0, GH = 0, b1, b2, img, energy = 0, running = false;
+  var CELL = 6, GW = 0, GH = 0, b1, b2, img, energy = 0, running = false;
   function setup(){
-    GW = Math.max(40, Math.min(Math.ceil(window.innerWidth / CELL), 480));
-    GH = Math.max(24, Math.min(Math.ceil(window.innerHeight / CELL), 300));
+    GW = Math.max(40, Math.min(Math.ceil(window.innerWidth / CELL), 320));
+    GH = Math.max(24, Math.min(Math.ceil(window.innerHeight / CELL), 180));
     cv.width = GW; cv.height = GH;
     img = ctx.createImageData(GW, GH);
     b1 = new Float32Array(GW * GH);
@@ -1589,7 +1590,7 @@
   try{ renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: false, alpha: false, powerPreference: 'high-performance' }); }
   catch(e){ return; }
   var coarse = window.matchMedia('(pointer:coarse)').matches;
-  var DPR = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 1.75);
+  var DPR = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 1.5);
   renderer.setPixelRatio(DPR);
   renderer.setClearColor(0xd9d2f3, 1);
   cv.classList.add('on');
@@ -1770,7 +1771,7 @@
   var orthoCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   var quadGeo = new THREE.PlaneGeometry(2, 2);
   var size = new THREE.Vector2(), fogSize = new THREE.Vector2();
-  var FOG_SCALE = coarse ? 0.7 : 1.0;
+  var FOG_SCALE = coarse ? 0.6 : 0.75;
   var rt = new THREE.WebGLRenderTarget(4, 4, { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, depthBuffer: false });
   var mouseT = new THREE.Vector2(0.62, 0.55), mouse = new THREE.Vector2(0.62, 0.55);
   var par = new THREE.Vector2(), parT = new THREE.Vector2();
@@ -2023,6 +2024,7 @@
     var o = []; for(var k = 0; k < 8; k++) o.push(a[k] + (b[k] - a[k]) * t); return o;
   }
   window.__dbg = { get mixer(){ return mixer; }, get root(){ return rootObj; }, get dim(){ return modelDim; }, cam: cam, holder: holder, u: glassMat.uniforms };
+  var modelWindowWorld = new THREE.Vector3(), modelViewMatrix = new THREE.Matrix4();
   var WIN = new THREE.Vector3(0.87, 5.27, -10.68);
   function updateModel(tt, dt, asp){
     if(mixer && window.__freezeT === undefined) mixer.update(dt); else if(mixer) mixer.setTime(window.__freezeT);
@@ -2050,7 +2052,7 @@
     // final approach: line the cloud-shaped window up with the screen centre and fly through it
     var wf = Math.min(Math.max((sProg - 0.50) / 0.36, 0), 1); wf = wf * wf * (3 - 2 * wf);
     if(wf > 0 && rootObj){
-      var sc = holder.scale.x, wl = WIN.clone().applyMatrix4(rootObj.matrix).multiplyScalar(sc).applyEuler(holder.rotation);
+      var sc = holder.scale.x, wl = modelWindowWorld.copy(WIN).applyMatrix4(rootObj.matrix).multiplyScalar(sc).applyEuler(holder.rotation);
       holder.position.x += (-wl.x - holder.position.x) * wf; holder.position.y += (-wl.y - holder.position.y) * wf; holder.position.z += (-wl.z) * wf;
     }
     // chapter captions
@@ -2064,7 +2066,7 @@
     rootInv.copy(rootObj.matrixWorld).invert(); rootMat.copy(rootObj.matrixWorld);
     var as = Math.min(Math.max((sProg - 0.03) / 0.44, 0), 1); glassMat.uniforms.uS.value = 0 * (1 - as * as * (3 - 2 * as));
     cam.updateMatrixWorld();
-    var mv4 = new THREE.Matrix4().multiplyMatrices(cam.matrixWorldInverse, rootObj.matrixWorld), me = mv4.elements, rm = glassMat.uniforms.uR.value.elements;
+    var mv4 = modelViewMatrix.multiplyMatrices(cam.matrixWorldInverse, rootObj.matrixWorld), me = mv4.elements, rm = glassMat.uniforms.uR.value.elements;
     for(var c = 0; c < 3; c++){ var l = Math.hypot(me[c * 4], me[c * 4 + 1], me[c * 4 + 2]) || 1; rm[c * 3] = me[c * 4] / l; rm[c * 3 + 1] = me[c * 4 + 1] / l; rm[c * 3 + 2] = me[c * 4 + 2] / l; }
     glassMat.uniforms.uLight.value.set((mouse.x - 0.5) * 2 * asp, (mouse.y - 0.5) * 2, -cam.position.z + 0.85);
     var fo = Math.min(Math.max((P - 0.86) / 0.10, 0), 1); fo = 1 - fo * fo * (3 - 2 * fo);
@@ -2259,8 +2261,10 @@
   }
   function audioUpdate(){}
   function setSound(on){
+    var button = document.getElementById("sndBtn");
+    if(button){ button.setAttribute("aria-pressed", on ? "true" : "false"); button.setAttribute("aria-label", on ? "Sound on" : "Sound off"); }
     if(on){
-      if(!AC && !audioInit()) return;
+      if(!AC && !audioInit()){ if(button) button.setAttribute("aria-pressed", "false"); return; }
       if(AC.state === 'suspended') AC.resume();
       A.on = true;
       var p = A.el.play(); if(p && p.catch) p.catch(function(){});
@@ -2318,7 +2322,7 @@
     var tt = (now - T0) / 1000;
     var time = reduce ? 6.0 : tt;
     var dt = Math.min(Math.max((now - prevNow) / 1000, 0.001), 0.1); prevNow = now;
-    mouse.lerp(mouseT, 0.05); par.lerp(parT, 0.04);
+    mouse.lerp(mouseT, 1 - Math.exp(-14 * dt)); par.lerp(parT, 1 - Math.exp(-10 * dt));
     var intro = reduce ? 1 : ease(tt / 2.4);
     var asp = window.innerWidth / window.innerHeight;
 

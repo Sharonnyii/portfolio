@@ -12,11 +12,12 @@
   var v=shader(gl.VERTEX_SHADER,vs),f=shader(gl.FRAGMENT_SHADER,fs);if(!v||!f)return;
   var program=gl.createProgram();gl.attachShader(program,v);gl.attachShader(program,f);gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))return;gl.useProgram(program);
   var buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);var pos=gl.getAttribLocation(program,'p');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
-  var ur=gl.getUniformLocation(program,'res'),ut=gl.getUniformLocation(program,'time'),up=gl.getUniformLocation(program,'pointer'),mx=0,my=0,raf=0,visible=false;
+  var ur=gl.getUniformLocation(program,'res'),ut=gl.getUniformLocation(program,'time'),up=gl.getUniformLocation(program,'pointer'),mx=0,my=0,raf=0,visible=false,lastDraw=-1000;
+  var video=document.getElementById("contactVideo");
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function resize(){var r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.max(1,Math.round(r.width*d));canvas.height=Math.max(1,Math.round(r.height*d));gl.viewport(0,0,canvas.width,canvas.height);if(reduce)draw(0);}
-  function draw(t){raf=0;gl.uniform2f(ur,canvas.width,canvas.height);gl.uniform1f(ut,reduce?0:t*.001);gl.uniform2f(up,mx,my);gl.drawArrays(gl.TRIANGLES,0,6);if(visible&&!document.hidden&&!reduce)raf=requestAnimationFrame(draw);}
-  function run(){if(visible&&!document.hidden&&!raf){if(reduce)draw(0);else raf=requestAnimationFrame(draw);}else if((!visible||document.hidden)&&raf){cancelAnimationFrame(raf);raf=0;}}
+  function resize(){var r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,1);canvas.width=Math.max(1,Math.round(r.width*d));canvas.height=Math.max(1,Math.round(r.height*d));gl.viewport(0,0,canvas.width,canvas.height);if(reduce)draw(0);}
+  function draw(t){raf=0;if(!reduce&&t-lastDraw<32){if(visible&&!document.hidden)raf=requestAnimationFrame(draw);return;}lastDraw=t;gl.uniform2f(ur,canvas.width,canvas.height);gl.uniform1f(ut,reduce?0:t*.001);gl.uniform2f(up,mx,my);gl.drawArrays(gl.TRIANGLES,0,6);if(visible&&!document.hidden&&!reduce)raf=requestAnimationFrame(draw);}
+  function run(){if(video){if(visible&&!document.hidden&&!reduce){var play=video.play();if(play)play.catch(function(){});}else video.pause();}if(visible&&!document.hidden&&!raf){if(reduce)draw(0);else raf=requestAnimationFrame(draw);}else if((!visible||document.hidden)&&raf){cancelAnimationFrame(raf);raf=0;}}
   canvas.parentNode.addEventListener('pointermove',function(e){var r=canvas.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;});
   resize();addEventListener('resize',resize);document.addEventListener('visibilitychange',run);
   if('IntersectionObserver'in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;run();},{rootMargin:'100px'}).observe(canvas.parentNode);else{visible=true;run();}
