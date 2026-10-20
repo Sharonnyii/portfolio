@@ -672,7 +672,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <!-- ================= SEQUENCE ================= -->
       <section class="seq" id="seq" aria-label="Who I am, my perspective and my approach">
         <div class="seq-pin">
-          <video class="atmosphere-video intro-atmosphere" muted loop playsinline preload="metadata" poster="intro-atmosphere.jpg" aria-hidden="true"><source src="intro-atmosphere.mp4" type="video/mp4"></video>
+          <video class="atmosphere-video intro-atmosphere" autoplay muted loop playsinline preload="metadata" poster="intro-atmosphere.jpg" aria-hidden="true"><source src="intro-atmosphere.mp4" type="video/mp4"></video>
           <div class="intro-video-shade" aria-hidden="true"></div>
           <div class="seq-space" id="seqSpace"></div>
           <canvas class="seq-stars" id="seqStars" aria-hidden="true"></canvas>
@@ -721,19 +721,19 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
               </div>
               <div class="hx-meta"><h3>Beyond the <em>Flame</em></h3><span class="hx-sub">An invitation to remember, connect and let go</span></div>
             </article>
-            <article class="hx-card" data-p="model">
-              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: 3D Modelling" data-cursor="view">
-                <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><img class="hx-fill" src="model-1.jpg" alt="Glass pavilion garden, 3D model, wide view" loading="lazy"><img class="hx-fill hx-alt" src="model-3.jpg" alt="Pavilion on a lantern stand, close view" loading="lazy"><span class="hx-tag">Click to open</span></div>
-              </div>
-              <div class="hx-meta"><h3>3D <em>Modelling</em></h3><span class="hx-sub">Glass pavilion garden, modelled in Maya</span></div>
-            </article>
             <article class="hx-card" data-p="vj">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: VJing Performance" data-cursor="view">
                 <div class="hx-glow" aria-hidden="true"></div>
                 <div class="hx-frame"><img class="hx-poster" src="https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><iframe class="hx-vid" data-kind="yt" data-id="O43imufUP-0" title="VJing performance preview" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe><span class="hx-tag">Click to open</span></div>
               </div>
               <div class="hx-meta"><h3>VJing <em>Performance</em></h3><span class="hx-sub">TouchDesigner, synthesizer, live instrument, Maya</span></div>
+            </article>
+            <article class="hx-card" data-p="model">
+              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: 3D Modelling" data-cursor="view">
+                <div class="hx-glow" aria-hidden="true"></div>
+                <div class="hx-frame"><img class="hx-fill" src="model-1.jpg" alt="Glass pavilion garden, 3D model, wide view" loading="lazy"><img class="hx-fill hx-alt" src="model-3.jpg" alt="Pavilion on a lantern stand, close view" loading="lazy"><span class="hx-tag">Click to open</span></div>
+              </div>
+              <div class="hx-meta"><h3>3D <em>Modelling</em></h3><span class="hx-sub">Glass pavilion garden, modelled in Maya</span></div>
             </article>
             <article class="hx-card" data-p="fed">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Public Screening" data-cursor="view">
@@ -760,7 +760,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 
       <!-- project page (opens over the site) -->
       <div class="proj" id="proj" role="dialog" aria-modal="true" aria-label="Project" hidden data-lenis-prevent>
-        <div class="project-atmosphere" aria-hidden="true"><video class="atmosphere-video" muted loop playsinline preload="metadata" poster="project-atmosphere.jpg"><source src="project-atmosphere.mp4" type="video/mp4"></video></div>
+        <div class="project-atmosphere" aria-hidden="true"><video class="atmosphere-video" autoplay muted loop playsinline preload="metadata" poster="project-atmosphere.jpg"><source src="project-atmosphere.mp4" type="video/mp4"></video></div>
         <button class="proj-close" id="projClose" type="button" aria-label="Close project"><span aria-hidden="true">&times;</span></button>
         <div class="proj-in" id="projIn"></div>
       </div>
@@ -1265,15 +1265,16 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       facts: [['Role', 'Lighting programming'], ['Venue', 'RMIT Capitol Theatre, Melbourne'], ['Format', 'Immersive lighting installation']],
       vid: { kind: 'vimeo', id: '1235462150', url: 'https://vimeo.com/1235462150', poster: 'https://vumbnail.com/1235462150.jpg', cta: 'Watch on Vimeo' } },
     vj: { kick: 'Visual &amp; Sound Design', title: 'VJing <em>Performance</em>',
-      body: ['Responsible for visual design and sound design for an immersive VJ performance exploring the relationship between contemporary digital media and Chinese cultural elements &mdash; using TouchDesigner, a sound synthesizer and live instrument playing, with 3D modelling in Maya.'],
-      facts: [['Role', 'Visual &amp; sound design'], ['Tools', 'TouchDesigner, Maya, synthesizer'], ['Format', 'Live VJ performance']],
+      behind: [['vj-sound-design.jpg', 'Sound design experimentation with a synthesizer'], ['vj-yangqin.jpg', 'Playing the Yangqin as the foundation for the sound design']],
+      social: 'https://www.instagram.com/p/DRMkzhSCeNi/',
+      body: ['An immersive VJ performance bringing Chinese musical traditions into dialogue with digital image and sound. As the main visual designer, I created the performance visuals using TouchDesigner and Maya. I also developed the sound design, using my own Yangqin playing as its foundation and exploring its textures through synthesizer-based sound experimentation.'],
+      facts: [['Role', 'Main visual designer &amp; sound designer'], ['Contribution', 'Visual design, Yangqin performance and sound design'], ['Tools', 'TouchDesigner, Maya, synthesizer, Yangqin'], ['Format', 'Live VJ performance']],
       vid: { kind: 'yt', id: 'O43imufUP-0', url: 'https://www.youtube.com/watch?v=O43imufUP-0', poster: 'https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg', cta: 'Watch on YouTube' } },
     lib: { kick: 'RMIT Library · Interactive installation', title: 'Beyond the <em>Flame</em>',
       vid: { kind: 'yt', id: 'HidQfL_VdBo', url: 'https://youtu.be/HidQfL_VdBo', poster: 'campfire-01.jpg', cta: 'Watch full video on YouTube' },
       body: ['An interactive installation inviting students to pause, write and let go. A message to someone loved or missed. A worry held quietly, waiting to be released.', 'Words become an offering to the fire. Together, we gather around and ignite the campfire, allowing light to hold what is difficult to say. For a moment, the library becomes a place of warmth, remembrance and shared presence.'],
       facts: [['Client', 'RMIT Library'], ['Contribution', 'TouchDesigner real-time campfire visuals; PIR motion and ultrasonic sensing programmed in Arduino IDE; LED strip synchronisation; installation setup'], ['Tools', 'TouchDesigner, Arduino IDE, PIR & ultrasonic sensors'], ['Format', 'Digital interactive installation']],
-      behind: [['campfire-bts-01.jpg', 'Beyond the Flame — behind the scenes, photograph 1'], ['campfire-bts-02.jpg', 'Beyond the Flame — behind the scenes, photograph 2'], ['campfire-bts-03.jpg', 'Campfire construction with paper forms, wood shavings and wiring']],
-      imgs: [['campfire-01.jpg', 'Digital Interactive Campfire at RMIT Library', 'wide'], ['campfire-02.jpg', 'The campfire installation in its library setting', 'wide']] },
+      behind: [['campfire-bts-01.jpg', 'Beyond the Flame — behind the scenes, photograph 1'], ['campfire-bts-02.jpg', 'Beyond the Flame — behind the scenes, photograph 2'], ['campfire-bts-03.jpg', 'Campfire construction with paper forms, wood shavings and wiring'], ['campfire-01.jpg', 'Digital Interactive Campfire at RMIT Library'], ['campfire-02.jpg', 'The campfire installation in its library setting']] },
     fed: { kick: 'Original work', title: 'Public <em>Screening</em>',
       body: ['Original work presented at Federation Square, Melbourne. Developed an endless-loop visual journey exploring the principle of paradox, combining 3D modelling and 2.5D animation to create a continuously evolving digital environment. The work explores how opposing ideas can coexist within a single visual experience.'],
       facts: [['Venue', 'Federation Square, Melbourne'], ['Techniques', '3D modelling, 2.5D animation'], ['Format', 'Endless-loop screening']],
@@ -1308,6 +1309,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     else html += '<div class="proj-grid' + ((d.imgs && d.imgs[0][2] === 'solo') ? '' : ' solo') + '">' + (d.imgs && d.imgs[0][2] === 'solo' ? '<div class="proj-media" style="aspect-ratio:902/1280;max-width:560px"><img class="pp-img" style="object-fit:contain;background:#f4f1ea" src="' + d.imgs[0][0] + '" alt="' + d.imgs[0][1] + '"></div>' : '') + text + '</div>';
     if(d.imgs && d.imgs[0][2] !== 'solo') html += '<div class="proj-gallery">' + d.imgs.map(function(m){ return '<img class="' + (m[2] === 'wide' ? 'wide' : '') + '" src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div>';
     if(d.behind) html += '<section class="project-bts" aria-label="Behind the scenes"><h3>Behind the Scenes</h3><div class="bts-grid">' + d.behind.map(function(m){ return '<img src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div></section>';
+    if(d.social) html += '<p class="project-social"><a class="linkout" href="' + d.social + '" target="_blank" rel="noopener">View the performance on Instagram &#8599;</a></p>';
     projIn.innerHTML = html; if(window.addLampTitle){ var projectTitle = projIn.querySelector('.proj-title'); window.addLampTitle(projectTitle, projectTitle.textContent); } proj.scrollTop = 0; proj.hidden = false;
     document.documentElement.classList.add('proj-open'); if(window.__lenis) window.__lenis.stop();
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ proj.classList.add('on'); }); });

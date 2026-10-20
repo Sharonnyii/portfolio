@@ -162,3 +162,17 @@ body .snd .eq i{transition:height .15s ease,opacity .15s ease}
 #proj .project-atmosphere{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 #proj .project-atmosphere::after{content:"";position:absolute;inset:0;background:rgba(5,7,12,.60)}
 #proj .project-atmosphere video{opacity:.85}
+/* Explicit positive layers keep video above the section background. */
+#seq .intro-atmosphere{z-index:0;max-width:none;transform:scale(1.025);transform-origin:center}
+#seq .intro-video-shade{z-index:1}
+#seq .seq-space,#seq .seq-glow,#seq .seq-ring,#seq .seq-stars{z-index:2}
+#seq .seq-words{z-index:3}
+#proj .project-atmosphere{z-index:0}
+#proj .project-atmosphere video{max-width:none;transform:scale(1.025)}
+#proj .proj-in{position:relative;z-index:1}
+#proj{scrollbar-width:none}
+#proj::-webkit-scrollbar{display:none}
+#proj.is-capitol .proj-media{width:86%;max-width:1600px;margin:65px auto;border:0}
+#proj .bts-grid img{border:0;border-radius:0;background:transparent;box-shadow:none}
+#proj .project-social{margin:45px auto 0;max-width:900px}
+@media(max-width:700px){#proj.is-capitol .proj-media{width:90%;margin:35px auto}}
