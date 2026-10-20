@@ -660,36 +660,25 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
         </div>
       </div>      </section>
       <!-- ================= SCROLL JOURNEY ================= -->
-      <section class="journey" id="journey" aria-label="About Sharon and her design philosophy">
+      <section class="journey" id="journey" aria-label="I create spaces to be encountered and experiences that continue to resonate after they disappear">
         <div class="jy-sticky">
-          <div class="jy-ch l personal-chapter" id="jy1"><span class="n">Who I am</span><h3>Curiosity shapes<br>how I <em>see.</em></h3><p>I’m Sharon. I’m drawn to light, space and the feeling of being present. I explore across art, music, performance and technology, letting different perspectives nourish my aesthetic judgment and sensitivity.</p></div>
-          <div class="jy-ch l personal-chapter" id="jy2"><span class="n">My perspective</span><h3>Nourished by<br>the <em>world.</em></h3><p>My inspiration comes not only from music, but from observing everyday life, understanding others and staying open to the world around me.</p></div>
-          <div class="jy-ch l personal-chapter" id="jy3"><span class="n">My approach</span><h3>Feeling deeply.<br>Designing with <em>empathy.</em></h3><p>The more deeply I experience life, the more empathy I bring to design. I try to see from the perspectives of the performer, the music and the audience, allowing these experiences to nourish what I create.</p></div>
+          <div class="jy-ch l model-statement" id="jy1"><h3>I create <em>spaces</em><br>to be encountered.</h3></div>
+          <div class="jy-ch l model-statement" id="jy2"><h3>And experiences<br>that continue to <em>resonate.</em></h3></div>
+          <div class="jy-ch l model-statement" id="jy3"><h3>After they<br><em>disappear.</em></h3></div>
           <div class="jy-bar" id="jyBar"><i></i></div>
         </div>
       </section>
-      <!-- ================= STATEMENT ================= -->
-      <section class="statement" id="statement">
-        <p class="st-lines">
-          <span class="ln fx" style="--o:4">I create <em>spaces</em></span>
-          <span class="ln fx" style="--o:20">to be encountered</span>
-          <span class="ln fx" style="--o:8">and experiences that</span>
-          <span class="ln fx" style="--o:30">continue to <em>resonate</em></span>
-          <span class="ln fx" style="--o:14">after they disappear.</span>
-        </p>
-      </section>
-
-      <!-- ================= SEQUENCE ================= -->
-      <section class="seq" id="seq" aria-label="Scenography, light, space">
+<!-- ================= SEQUENCE ================= -->
+      <section class="seq" id="seq" aria-label="Who I am, my perspective and my approach">
         <div class="seq-pin">
           <div class="seq-space" id="seqSpace"></div>
           <canvas class="seq-stars" id="seqStars" aria-hidden="true"></canvas>
           <div class="seq-glow" id="seqGlow"></div>
           <div class="seq-ring" id="seqRing"></div>
           <div class="seq-words">
-            <div class="sw" role="heading" aria-level="2" style="--ty:50%">Lighting</div>
-            <div class="sw" role="heading" aria-level="2" style="--ty:60%">Scenography</div>
-            <div class="sw" role="heading" aria-level="2" style="--ty:52%">Space</div>
+            <div class="sw" role="heading" aria-level="2" style="--ty:43%">Who I am</div><p class="seq-personal-copy" data-chapter="0">I’m Sharon. I’m drawn to light, space and the feeling of being present. I explore across art, music, performance and technology, letting different perspectives nourish my aesthetic judgment and sensitivity.</p>
+            <div class="sw" role="heading" aria-level="2" style="--ty:43%">My perspective</div><p class="seq-personal-copy" data-chapter="1">My inspiration comes not only from music, but from observing everyday life, understanding others and staying open to the world around me.</p>
+            <div class="sw" role="heading" aria-level="2" style="--ty:43%">My approach</div><p class="seq-personal-copy" data-chapter="2">The more deeply I experience life, the more empathy I bring to design. I try to see from the perspectives of the performer, the music and the audience, allowing these experiences to nourish what I create.</p>
           </div>
         </div>
       </section>
@@ -724,7 +713,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
             <article class="hx-card" data-p="lib">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Beyond the Flame, Digital Campfire" data-cursor="view">
                 <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><video class="hx-vid campfire-preview" data-kind="local" data-src="campfire-preview.mp4" poster="campfire-01.jpg" muted loop playsinline preload="none" aria-label="Beyond the Flame: installation preview, 0:55 to 1:03"></video><span class="hx-tag">Click to open</span></div>
+                <div class="hx-frame"><video class="hx-vid campfire-preview" data-kind="local" data-src="campfire-preview.mp4" poster="campfire-01.jpg" muted loop playsinline preload="none" aria-label="Beyond the Flame: installation preview, 0:09 to 0:13"></video><span class="hx-tag">Click to open</span></div>
               </div>
               <div class="hx-meta"><span class="hx-n">RMIT Library</span><h3>Beyond the <em>Flame</em></h3><span class="hx-sub">An invitation to remember, connect and let go</span></div>
             </article>
@@ -1067,6 +1056,8 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     for(var k = 0; k < words.length; k++){
       var t = clamp(p * 3 - k, 0, 1);
       if(k === 0) t = clamp(p * 3 + 0.2, 0, 1);
+      var caption = seq.querySelector('[data-chapter="' + k + '"]');
+      if(caption) caption.style.opacity = (sm((t - 0.12) / 0.18) * (1 - sm((t - 0.7) / 0.2))).toFixed(3);
       var ch = words[k]._ch, n = ch.length;
       for(var i = 0; i < n; i++){
         var pos = n > 1 ? i / (n - 1) : 0;
