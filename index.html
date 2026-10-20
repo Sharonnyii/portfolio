@@ -1443,7 +1443,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   var hsT = 1, shown = false, lx = 0, ly = 0, fr = 0, vis = 0;
   document.documentElement.classList.add('has-orb');
 
-  var TRAIL = 5, trail = [];
+  var TRAIL = 3, trail = [];
   for(var j = 0; j < TRAIL; j++){
     var d = document.createElement('i');
     d.className = 'cursor-drop';
@@ -1453,8 +1453,12 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     trail.push({ el: d, x: 0, y: 0 });
   }
 
-  window.addEventListener('mousemove', function(e){
+  window.addEventListener('pointermove', function(e){
+    if(e.pointerType === 'touch') return;
     tx = e.clientX; ty = e.clientY;
+    // Position the functional cursor immediately; only decorative droplets trail.
+    orb.style.setProperty('--x', tx + 'px'); orb.style.setProperty('--y', ty + 'px');
+    ring.style.setProperty('--x', tx + 'px'); ring.style.setProperty('--y', ty + 'px');
     if(!shown){
       x = rx = lx = tx; y = ry = ly = ty; shown = true;
       trail.forEach(function(t){ t.x = tx; t.y = ty; });
@@ -1495,14 +1499,14 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 
   function frame(){
     var px = x, py = y;
-    var k = reduce ? 1 : 0.58;
+    var k = 1;
     x += (tx - x) * k; y += (ty - y) * k;
-    rx += (tx - rx) * (reduce ? 1 : 0.34); ry += (ty - ry) * (reduce ? 1 : 0.34);
+    rx = tx; ry = ty;
     var vx = x - px, vy = y - py;
     var sp = Math.sqrt(vx*vx + vy*vy);
-    var st = reduce ? 0 : Math.min(sp / 40, 0.22);
+    var st = reduce ? 0 : Math.min(sp / 80, 0.10);
     if(sp > 0.6) ang = Math.atan2(vy, vx);
-    hs += (hsT - hs) * 0.32;
+    hs += (hsT - hs) * 0.55;
     vis += ((shown ? 1 : 0) - vis) * 0.25;
 
     orb.style.setProperty('--x', x + 'px');
@@ -1521,7 +1525,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     var ax = x, ay = y;
     for(var j = 0; j < TRAIL; j++){
       var t = trail[j];
-      t.x += (ax - t.x) * 0.34; t.y += (ay - t.y) * 0.34;
+      t.x += (ax - t.x) * 0.65; t.y += (ay - t.y) * 0.65;
       t.el.style.transform = 'translate(' + t.x.toFixed(1) + 'px,' + t.y.toFixed(1) + 'px) translate(-50%,-50%)';
       t.el.style.opacity = (tvis * (0.85 - j*0.13)).toFixed(2);
       ax = t.x; ay = t.y;

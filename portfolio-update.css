@@ -204,3 +204,7 @@ body .snd .eq i{transition:height .15s ease,opacity .15s ease}
 #proj .proj-facts dd{text-align:left;font-family:'Instrument Sans',sans-serif;font-size:14px;line-height:1.65;color:#f4f0f9}
 #proj .proj-text>.linkout{border:0;border-bottom:1px solid #ffffff70;padding:12px 0;background:transparent;font-size:11px;letter-spacing:.06em}
 @media(max-width:700px){#proj .proj-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 20px}#proj .proj-text,#proj.is-capitol .proj-text{padding:20px 24px 45px}#proj .proj-grid>.proj-media{margin-bottom:35px}}
+
+/* Direct pointer tracking; composite moving cursor layers separately. */
+body .cursor-orb,body .cursor-ring,body .cursor-glow,body .cursor-drop{will-change:transform;transition:none}
+body .orb-body{-webkit-backdrop-filter:none;backdrop-filter:none}
