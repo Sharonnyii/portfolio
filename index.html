@@ -617,7 +617,7 @@
 <canvas class="atmos3d" id="atmos3d" aria-hidden="true"></canvas>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="nmSharp" x="0" y="0" width="100%" height="100%"><feComponentTransfer><feFuncA type="linear" slope="6" intercept="-2.9"/></feComponentTransfer></filter></svg>
 <canvas class="hero-glass" id="glassHero" aria-hidden="true"></canvas>
-<div class="noise"></div>
+
 <canvas class="ripple" id="rippleCanvas" aria-hidden="true"></canvas>
 <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
@@ -1190,6 +1190,8 @@
     sc.onload = function(){ vimeoReady.forEach(function(f){ f(); }); }; document.head.appendChild(sc);
   }
   function startPreview(f){
+    // Local file pages cannot provide the HTTP referrer YouTube requires.
+    if(f.getAttribute('data-kind') === 'yt' && location.protocol === 'file:') return;
     if(f.__on){ f.__play && f.__play(); return; } f.__on = true;
     var id = f.getAttribute('data-id');
     if(f.getAttribute('data-kind') === 'local'){
@@ -1211,7 +1213,7 @@
       f.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&mute=1&loop=1&playlist=' + id + '&controls=0&modestbranding=1&rel=0&playsinline=1&enablejsapi=1';
       var cmd = function(fn){ try{ f.contentWindow.postMessage(JSON.stringify({ event: 'command', func: fn, args: [] }), '*'); }catch(e){} };
       f.addEventListener('load', function(){ try{ f.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 1 }), '*'); }catch(e){} });
-      window.addEventListener('message', function(e){ if(e.source !== f.contentWindow) return; var d = e.data; try{ if(typeof d === 'string') d = JSON.parse(d); }catch(x){ return; } if(d && (d.event === 'onReady' || d.event === 'initialDelivery' || d.event === 'infoDelivery')) f.classList.add('ready'); });
+      window.addEventListener('message', function(e){ if(e.source !== f.contentWindow) return; var d = e.data; try{ if(typeof d === 'string') d = JSON.parse(d); }catch(x){ return; } if(d && d.event === 'onError'){ f.classList.remove('ready'); f.__pause && f.__pause(); } else if(d && ((d.event === 'onStateChange' && d.info === 1) || (d.event === 'infoDelivery' && d.info && d.info.playerState === 1 && d.info.currentTime > 0))) f.classList.add('ready'); });
       f.__play = function(){ cmd('playVideo'); }; f.__pause = function(){ cmd('pauseVideo'); };
     }
   }
@@ -1262,6 +1264,7 @@
   };
   var proj = document.getElementById('proj'), projIn = document.getElementById('projIn'), projClose = document.getElementById('projClose'), lastFocus = null;
   function mediaHTML(v){
+    if(v.kind === 'yt' && location.protocol === 'file:') return '<div class="proj-media"><a class="pp" href="' + v.url + '" target="_blank" rel="noopener" aria-label="' + v.cta + '"><img class="pp-img" src="' + v.poster + '" alt="Project video poster"><span class="pp-play"></span><span class="pp-cta">' + v.cta + ' &#8599;</span></a></div>';
     var src = v.kind === 'vimeo' ? 'https://player.vimeo.com/video/' + v.id + '?autoplay=1&title=0&byline=0&portrait=0&dnt=1' : 'https://www.youtube.com/embed/' + v.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
     return '<div class="proj-media"><a class="pp" href="' + v.url + '" target="_blank" rel="noopener" aria-label="' + v.cta + '"><img class="pp-img" src="' + v.poster + '" alt="" onerror="this.style.display=\'none\'"><span class="pp-play"></span><span class="pp-cta">' + v.cta + ' &#8599;</span></a><iframe id="projFrame" title="Full video" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
   }
@@ -1281,7 +1284,7 @@
       fr.src = fr.getAttribute('src') || (d.vid.kind === 'vimeo' ? 'https://player.vimeo.com/video/' + d.vid.id + '?autoplay=1&title=0&byline=0&portrait=0&dnt=1' : 'https://www.youtube.com/embed/' + d.vid.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1');
       if(d.vid.kind === 'vimeo') loadVimeoSDK(function(){ try{ new Vimeo.Player(fr).ready().then(function(){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; }); }catch(e){} });
       else { fr.addEventListener('load', function(){ try{ fr.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 2 }), '*'); }catch(e){} });
-        var onm = function(e){ if(e.source !== fr.contentWindow) return; var m = e.data; try{ if(typeof m === 'string') m = JSON.parse(m); }catch(x){ return; } if(m && (m.event === 'onReady' || m.event === 'initialDelivery' || m.event === 'infoDelivery')){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; window.removeEventListener('message', onm); } };
+        var onm = function(e){ if(e.source !== fr.contentWindow) return; var m = e.data; try{ if(typeof m === 'string') m = JSON.parse(m); }catch(x){ return; } if(m && m.event === 'onError'){ fr.classList.remove('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'auto'; } else if(m && ((m.event === 'onStateChange' && m.info === 1) || (m.event === 'infoDelivery' && m.info && m.info.playerState === 1 && m.info.currentTime > 0))){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; } };
         window.addEventListener('message', onm); }
     }
     if(projClose) projClose.focus({ preventScroll: true });
