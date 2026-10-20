@@ -176,3 +176,8 @@ body .snd .eq i{transition:height .15s ease,opacity .15s ease}
 #proj .bts-grid img{border:0;border-radius:0;background:transparent;box-shadow:none}
 #proj .project-social{margin:45px auto 0;max-width:900px}
 @media(max-width:700px){#proj.is-capitol .proj-media{width:90%;margin:35px auto}}
+
+#contact .contact-socials{display:flex;justify-content:center;align-items:center;gap:26px;margin:30px auto 0}
+#contact .contact-socials a{display:flex;align-items:center;justify-content:center;width:56px;height:56px;color:#fff;text-decoration:none;transition:opacity .15s,transform .15s}
+#contact .contact-socials svg{display:block;width:38px;height:38px}
+#contact .contact-socials a:hover{opacity:.8;transform:scale(1.04)}
