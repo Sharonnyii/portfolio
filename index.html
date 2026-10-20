@@ -756,21 +756,16 @@
 
 
       <!-- ================= CONTACT ================= -->
-      <footer id="contact">
-        <div class="foot-grid">
-          <div>
-            <div class="foot-name">Let's work<br>on something.</div>
-          </div>
+      <footer id="contact" class="contact-scene">
+        <canvas id="contactGlass" aria-hidden="true"></canvas>
+        <div class="contact-shade" aria-hidden="true"></div>
+        <div class="contact-top"><span>Sharon Yii</span><a href="#top">Back to top ↗</a></div>
+        <div class="contact-centre">
+          <p class="contact-invite">Let’s bring your <em>space to life.</em><br>Through light, atmosphere and scenography.</p>
+          <a class="contact-email" href="mailto:sharonyii0924@gmail.com">sharonyii0924@gmail.com</a>
+          <button class="copybtn" id="copyEmail" type="button">Copy email</button>
         </div>
-        <div class="foot-copy">Sharon Yii Zhi Ti — Lighting &amp; Scenography. Melbourne / Kuala Lumpur, 2026.</div>
-        <div class="foot-stage">
-          <video class="foot-leak" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="leak.webm" type="video/webm"></video>
-          <ul class="contact">
-            <li><span class="ct-k">Email</span><span class="ct-v"><a href="mailto:sharonyii0924@gmail.com">sharonyii0924@gmail.com</a><button class="copybtn" id="copyEmail" type="button">Copy</button></span></li>
-            <li><span class="ct-k">LinkedIn</span><span class="ct-v"><a href="https://www.linkedin.com/" target="_blank" rel="noopener">Sharon Yii &#8599;</a></span></li>
-            <li><span class="ct-k">Instagram</span><span class="ct-v"><a href="https://www.instagram.com/sharonnyii/" target="_blank" rel="noopener">@sharonnyii &#8599;</a></span></li>
-          </ul>
-        </div>
+        <div class="contact-bottom"><div><span>Lighting design &amp; scenography</span><span>Melbourne · Kuala Lumpur</span></div><a href="https://www.instagram.com/sharonnyii/" target="_blank" rel="noopener">Instagram ↗</a></div>
       </footer>
     </main>
   </div>
@@ -2277,7 +2272,7 @@
     if(b){ b.setAttribute('aria-pressed', on ? 'true' : 'false'); b.setAttribute('aria-label', on ? 'Sound on' : 'Sound off'); }
   }
   var sndBtn = document.getElementById('sndBtn');
-  if(sndBtn){ if(!water) sndBtn.style.display = 'none'; sndBtn.addEventListener('click', function(ev){ ev.stopPropagation(); setSound(!A.on); }); }
+  if(sndBtn){ sndBtn.addEventListener('click', function(ev){ ev.stopPropagation(); setSound(!A.on); }); }
 
   function layout(){
     var w = window.innerWidth, h = window.innerHeight;
@@ -2408,3 +2403,5 @@
   window.__heroGlass = { frame: frame };
 })();
 </script>
+
+<script src="contact-glass.js"></script>
