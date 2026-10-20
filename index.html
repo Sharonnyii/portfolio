@@ -1264,9 +1264,10 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       facts: [['Role', 'Visual &amp; sound design'], ['Tools', 'TouchDesigner, Maya, synthesizer'], ['Format', 'Live VJ performance']],
       vid: { kind: 'yt', id: 'O43imufUP-0', url: 'https://www.youtube.com/watch?v=O43imufUP-0', poster: 'https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg', cta: 'Watch on YouTube' } },
     lib: { kick: 'RMIT Library · Interactive installation', title: 'Beyond the <em>Flame</em>',
-      vid: { kind: 'yt', id: 'HidQfL_VdBo', url: 'https://youtu.be/HidQfL_VdBo', poster: 'campfire-01.jpg', cta: 'Watch full film on YouTube' },
-      body: ['An invitation to pause, remember and let go. Created for RMIT Library, this digital interactive campfire invites visitors to write a message to someone they love or miss, or put a worry into words and symbolically burn it away.', 'The experience begins with discovery: the first person to encounter the installation ignites the campfire. Their presence turns an unlit installation into a shared gathering point.', 'My contribution connected the visual and physical experience: I created the real-time campfire visuals in TouchDesigner, worked with PIR motion detection and ultrasonic sensing using Arduino IDE, synchronised the LED strip, and contributed to the installation setup.', 'This project brings together my interests in lighting and scenography: using responsive light and a familiar gathering ritual to give a space an emotional purpose.'],
-      facts: [['Context', 'Created for RMIT Library'], ['Contribution', 'Real-time visuals, sensing, LED synchronisation & setup'], ['Tools', 'TouchDesigner, Arduino IDE, PIR & ultrasonic sensors'], ['Format', 'Digital interactive installation']],
+      vid: { kind: 'yt', id: 'HidQfL_VdBo', url: 'https://youtu.be/HidQfL_VdBo', poster: 'campfire-01.jpg', cta: 'Watch full video on YouTube' },
+      body: ['An interactive installation inviting students to pause, write and let go. A message to someone loved or missed. A worry held quietly, waiting to be released.', 'Words become an offering to the fire. Together, we gather around and ignite the campfire, allowing light to hold what is difficult to say. For a moment, the library becomes a place of warmth, remembrance and shared presence.'],
+      facts: [['Client', 'RMIT Library'], ['Contribution', 'TouchDesigner real-time campfire visuals; PIR motion and ultrasonic sensing programmed in Arduino IDE; LED strip synchronisation; installation setup'], ['Tools', 'TouchDesigner, Arduino IDE, PIR & ultrasonic sensors'], ['Format', 'Digital interactive installation']],
+      behind: [['campfire-bts-01.jpg', 'Beyond the Flame — behind the scenes, photograph 1'], ['campfire-bts-02.jpg', 'Beyond the Flame — behind the scenes, photograph 2'], ['campfire-bts-03.jpg', 'Campfire construction with paper forms, wood shavings and wiring']],
       imgs: [['campfire-01.jpg', 'Digital Interactive Campfire at RMIT Library', 'wide'], ['campfire-02.jpg', 'The campfire installation in its library setting', 'wide']] },
     fed: { kick: 'Original work', title: 'Public <em>Screening</em>',
       body: ['Original work presented at Federation Square, Melbourne. Developed an endless-loop visual journey exploring the principle of paradox, combining 3D modelling and 2.5D animation to create a continuously evolving digital environment. The work explores how opposing ideas can coexist within a single visual experience.'],
@@ -1282,10 +1283,13 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       imgs: [['cf-collage.jpg', 'Chao Feng 43rd Anniversary Concert: poster, programme booklet, ticket and handout', 'solo']] }
   };
   var proj = document.getElementById('proj'), projIn = document.getElementById('projIn'), projClose = document.getElementById('projClose'), lastFocus = null;
+  function videoCTA(v){
+    return v.kind === 'yt' ? '<svg class="youtube-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#ff0033" d="M23 7a3 3 0 0 0-2-2C19 4.5 12 4.5 12 4.5S5 4.5 3 5a3 3 0 0 0-2 2C.5 9 .5 12 .5 12s0 3 .5 5a3 3 0 0 0 2 2c2 .5 9 .5 9 .5s7 0 9-.5a3 3 0 0 0 2-2c.5-2 .5-5 .5-5S23.5 9 23 7Z"/><path fill="#fff" d="m10 15 6-3-6-3z"/></svg><span>Watch full video on YouTube</span>' : v.cta + ' &#8599;';
+  }
   function mediaHTML(v){
-    if(v.kind === 'yt' && location.protocol === 'file:') return '<div class="proj-media"><a class="pp" href="' + v.url + '" target="_blank" rel="noopener" aria-label="' + v.cta + '"><img class="pp-img" src="' + v.poster + '" alt="Project video poster"><span class="pp-play"></span><span class="pp-cta">' + v.cta + ' &#8599;</span></a></div>';
+    if(v.kind === 'yt' && location.protocol === 'file:') return '<div class="proj-media"><a class="pp" href="' + v.url + '" target="_blank" rel="noopener" aria-label="' + v.cta + '"><img class="pp-img" src="' + v.poster + '" alt="Project video poster"><span class="pp-play"></span><span class="pp-cta">' + videoCTA(v) + '</span></a></div>';
     var src = v.kind === 'vimeo' ? 'https://player.vimeo.com/video/' + v.id + '?autoplay=1&title=0&byline=0&portrait=0&dnt=1' : 'https://www.youtube.com/embed/' + v.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1';
-    return '<div class="proj-media"><a class="pp" href="' + v.url + '" target="_blank" rel="noopener" aria-label="' + v.cta + '"><img class="pp-img" src="' + v.poster + '" alt="" onerror="this.style.display=\'none\'"><span class="pp-play"></span><span class="pp-cta">' + v.cta + ' &#8599;</span></a><iframe id="projFrame" title="Full video" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+    return '<div class="proj-media"><a class="pp" href="' + v.url + '" target="_blank" rel="noopener" aria-label="' + v.cta + '"><img class="pp-img" src="' + v.poster + '" alt="" onerror="this.style.display=\'none\'"><span class="pp-play"></span><span class="pp-cta">' + videoCTA(v) + '</span></a><iframe id="projFrame" title="Full video" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
   }
   function openProj(id){
     var d = P[id]; if(!d || !proj) return;
@@ -1293,12 +1297,13 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     projClose.disabled = false;
     proj.classList.toggle('is-capitol', id === 'capitol');
     lastFocus = document.activeElement;
-    var html = '<div class="proj-kicker">' + d.kick + '</div><h2 class="proj-title">' + d.title + '</h2>';
-    var text = '<div class="proj-text">' + d.body.map(function(t){ return '<p>' + t + '</p>'; }).join('') + '<dl class="proj-facts">' + d.facts.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl>' + (d.vid ? '<a class="linkout" href="' + d.vid.url + '" target="_blank" rel="noopener">' + d.vid.cta + '</a>' : '') + '</div>';
+    var html = '<h2 class="proj-title">' + d.title + '</h2>';
+    var text = '<div class="proj-text">' + d.body.map(function(t){ return '<p>' + t + '</p>'; }).join('') + '<dl class="proj-facts">' + d.facts.map(function(f){ return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('') + '</dl>' + (d.vid ? '<a class="linkout" href="' + d.vid.url + '" target="_blank" rel="noopener">' + videoCTA(d.vid) + '</a>' : '') + '</div>';
     if(d.vid) html += '<div class="proj-grid">' + mediaHTML(d.vid) + text + '</div>';
     else html += '<div class="proj-grid' + ((d.imgs && d.imgs[0][2] === 'solo') ? '' : ' solo') + '">' + (d.imgs && d.imgs[0][2] === 'solo' ? '<div class="proj-media" style="aspect-ratio:902/1280;max-width:560px"><img class="pp-img" style="object-fit:contain;background:#f4f1ea" src="' + d.imgs[0][0] + '" alt="' + d.imgs[0][1] + '"></div>' : '') + text + '</div>';
     if(d.imgs && d.imgs[0][2] !== 'solo') html += '<div class="proj-gallery">' + d.imgs.map(function(m){ return '<img class="' + (m[2] === 'wide' ? 'wide' : '') + '" src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div>';
-    projIn.innerHTML = html; if(id === 'capitol' && window.addLampTitle) window.addLampTitle(projIn.querySelector('.proj-title'), 'lighting programming'); proj.scrollTop = 0; proj.hidden = false;
+    if(d.behind) html += '<section class="project-bts" aria-label="Behind the scenes"><h3>Behind the Scenes</h3><div class="bts-grid">' + d.behind.map(function(m){ return '<img src="' + m[0] + '" alt="' + m[1] + '" loading="lazy">'; }).join('') + '</div></section>';
+    projIn.innerHTML = html; if(window.addLampTitle){ var projectTitle = projIn.querySelector('.proj-title'); window.addLampTitle(projectTitle, projectTitle.textContent); } proj.scrollTop = 0; proj.hidden = false;
     document.documentElement.classList.add('proj-open'); if(window.__lenis) window.__lenis.stop();
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ proj.classList.add('on'); }); });
     var fr = document.getElementById('projFrame');

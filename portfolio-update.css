@@ -1,6 +1,14 @@
 .focus-line{color:white;font-family:var(--mono,monospace);font-size:clamp(11px,1.2vw,15px);letter-spacing:.05em;text-shadow:0 2px 16px #191027;margin-bottom:22px}
 .jy-ch .chapter-skill{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.03em;border-top:1px solid #ffffff50;padding-top:12px}
 .campfire-preview{object-fit:cover;opacity:1}
+.proj-title.lamp-title{height:auto;aspect-ratio:var(--lamp-ratio);width:100%;margin-bottom:48px}
+.project-bts{max-width:900px;margin:55px auto 0}
+.project-bts h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(26px,3vw,40px);margin:0 0 22px}
+.bts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.bts-grid img{width:100%;height:210px;object-fit:contain;background:#ffffff06;border:1px solid #ffffff18;border-radius:7px}
+.youtube-icon{width:24px;height:24px;flex:none;vertical-align:middle}
+.linkout,.pp-cta{display:inline-flex;align-items:center;gap:10px}
+@media(max-width:650px){.bts-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.bts-grid img{height:170px}.proj-title.lamp-title{margin-bottom:30px}}
 .pixel-controls{display:flex;align-items:center;gap:16px;margin-top:12px;font-family:var(--mono);font-size:10px;flex-wrap:wrap}
 .pixel-controls>div{display:flex;gap:2px;border:1px solid #fff4;border-radius:30px;padding:3px;background:#ffffff08}
 .pixel-controls button{color:inherit;cursor:pointer;border:1px solid transparent;background:transparent;border-radius:30px;padding:7px 12px;font:inherit}
