@@ -769,6 +769,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       <!-- ================= CONTACT ================= -->
       <footer id="contact" class="contact-scene">
         <video class="contact-background-video" id="contactVideo" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="lihgtleaksunset.mp4" type="video/mp4"></video>
+        <canvas id="lightLeakFlow" aria-hidden="true"></canvas>
         <div class="contact-shade" aria-hidden="true"></div>
         <div class="contact-top"><span>Sharon Yii</span><a href="#top">Back to top ↗</a></div>
         <div class="contact-centre">
@@ -1135,7 +1136,6 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     if('IntersectionObserver' in window && seq){
       new IntersectionObserver(function(en){ seqVisible = en[0].isIntersecting; }, { threshold: 0 }).observe(seq);
     } else seqVisible = true;
-    requestAnimationFrame(starLoop);
     updateFx(); updateSeq();
   }
 
@@ -1301,7 +1301,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     var fr = document.getElementById('projFrame');
     if(fr && d.vid){
       fr.src = fr.getAttribute('src') || (d.vid.kind === 'vimeo' ? 'https://player.vimeo.com/video/' + d.vid.id + '?autoplay=1&title=0&byline=0&portrait=0&dnt=1' : 'https://www.youtube.com/embed/' + d.vid.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1');
-      if(d.vid.kind === 'vimeo') loadVimeoSDK(function(){ try{ new Vimeo.Player(fr).ready().then(function(){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; }); }catch(e){} });
+      if(d.vid.kind === 'vimeo') loadVimeoSDK(function(){ try{ var mainPlayer = new Vimeo.Player(fr); mainPlayer.ready().then(function(){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; if(id === 'capitol' && window.setupCapitolAmbient) proj.__ambientCleanup = window.setupCapitolAmbient(fr, mainPlayer); }); }catch(e){} });
       else { fr.addEventListener('load', function(){ try{ fr.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 2 }), '*'); }catch(e){} });
         var onm = function(e){ if(e.source !== fr.contentWindow) return; var m = e.data; try{ if(typeof m === 'string') m = JSON.parse(m); }catch(x){ return; } if(m && m.event === 'onError'){ fr.classList.remove('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'auto'; } else if(m && ((m.event === 'onStateChange' && m.info === 1) || (m.event === 'infoDelivery' && m.info && m.info.playerState === 1 && m.info.currentTime > 0))){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; } };
         window.addEventListener('message', onm); }
@@ -1310,6 +1310,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   }
   function closeProj(){
     if(!proj || proj.hidden) return;
+    if(proj.__ambientCleanup){ proj.__ambientCleanup(); proj.__ambientCleanup=null; }
     proj.classList.remove('on');
     setTimeout(function(){ proj.hidden = true; projIn.innerHTML = ''; document.documentElement.classList.remove('proj-open'); if(window.__lenis) window.__lenis.start(); if(lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true }); }, 460);
   }
@@ -2434,3 +2435,5 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <script src="depth-words.js"></script>
 
 <script src="preview-effects.js"></script>
+
+<script src="portfolio-motion.js"></script>
