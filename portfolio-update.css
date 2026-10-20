@@ -1,6 +1,12 @@
 .focus-line{color:white;font-family:var(--mono,monospace);font-size:clamp(11px,1.2vw,15px);letter-spacing:.05em;text-shadow:0 2px 16px #191027;margin-bottom:22px}
 .jy-ch .chapter-skill{font-family:var(--mono,monospace);font-size:11px;letter-spacing:.03em;border-top:1px solid #ffffff50;padding-top:12px}
 .campfire-preview{object-fit:cover;opacity:1}
+.top-symbol{position:fixed;top:max(16px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:84px;height:48px;overflow:hidden;z-index:91;display:block;border-radius:6px;transition:opacity .15s ease}
+.top-symbol img{position:absolute;width:158.7px;height:224.5px;max-width:none;left:-33.5px;top:-70px;pointer-events:none}
+.top-symbol:hover{opacity:.75}
+.top-symbol:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.proj-open .top-symbol{visibility:hidden}
+@media(max-width:650px){.hero-top>span{max-width:calc(50% - 50px);font-size:10px}.top-symbol{top:12px}}
 body .snd{top:auto;right:auto;left:max(22px,env(safe-area-inset-left));bottom:max(22px,env(safe-area-inset-bottom));width:52px;height:52px;color:#fff;border-color:#ffffff65;background:#ffffff14}
 body .snd .eq i{opacity:1}
 body .snd:not([aria-pressed="true"]) .eq i:nth-child(2){height:9px}

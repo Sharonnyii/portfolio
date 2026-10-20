@@ -623,6 +623,7 @@
 <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 <div class="cursor-orb" id="cursorOrb" aria-hidden="true"><i class="orb-body"></i><i class="orb-icon"></i></div>
 
+<a class="top-symbol" href="#top" aria-label="Back to top" title="Back to top"><img src="sharon-symbol.png" alt="Sharon Yii symbol" width="1587" height="2245"></a>
 <div class="wrap">
   <div class="stage">
     <main>
@@ -956,6 +957,12 @@
       requestAnimationFrame(raf);
     }
   }catch(e){}
+
+  var topSymbol = document.querySelector('.top-symbol');
+  if(topSymbol) topSymbol.addEventListener('click', function(e){
+    e.preventDefault();
+    if(lenis) lenis.scrollTo(0); else window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+  });
 
   // Reveal on scroll
   var items = document.querySelectorAll('.reveal');
