@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Sharon Yii — New Media Scenographer. Lighting, VJ and visual work.">
-<title>Sharon Yii — Scenographer</title>
+<meta name="description" content="Sharon Yii — Lighting designer and scenographer. Light, space and interactive environments. Melbourne / Kuala Lumpur.">
+<title>Sharon Yii — Lighting &amp; Scenography</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400&family=Instrument+Serif:ital@0;1&family=Nunito:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portfolio-update.css">
 <style>
   /* Layout concept: a lit stage in negative space — one column of "cue sheet" reads
      down the left edge (channel numbers, timecodes, running notes) while the work
@@ -625,6 +626,19 @@
 <div class="wrap">
   <div class="stage">
     <main>
+<section class="light-prologue" id="light-prologue" aria-label="Lighting and scenography introduction">
+  <div class="light-prologue-pin">
+    <div class="light-beam beam-one" aria-hidden="true"></div><div class="light-beam beam-two" aria-hidden="true"></div>
+    <canvas id="lightSnow" aria-hidden="true"></canvas>
+    <div class="prologue-meta"><span>Sharon Yii</span><span>Melbourne · Kuala Lumpur</span></div>
+    <div class="prologue-copy"><p class="prologue-label">Lighting design &amp; scenography</p>
+      <h2>First, <em>light.</em><br>Then, a world.</h2>
+      <p class="prologue-intent">I explore how light shapes space, holds emotion<br class="desktop-break"> and invites us into an experience.</p>
+      <a class="prologue-work" href="#work">Explore selected work ↗</a>
+    </div>
+    <div class="prologue-bottom"><span>Light · Space · Presence</span><a href="#top">Scroll into the atmosphere ↓</a></div>
+  </div>
+</section>
       <!-- ================= HERO ================= -->
       <section id="top" class="hero">
         <div class="hero-top">
@@ -632,23 +646,23 @@
           <button class="snd" id="sndBtn" type="button" aria-pressed="false" aria-label="Sound off"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>
         </div>
         <div class="hero-vert" aria-hidden="true"><span>Scenography</span><span>Light</span><span>Stage</span><span>New media</span></div>
-        <div class="hero-stack">
+        <div class="hero-stack"><p class="focus-line">Sharon Yii — Lighting Designer &amp; Scenographer</p>
           <h1><span class="name-link" id="nameLink" tabindex="0" aria-label="sharonnyii">
             <span class="nm-board" id="nmBox"><canvas id="nmCanvas" aria-hidden="true"></canvas></span>
           </span></h1>
         </div>
         <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <span>Lighting Design<em>·</em>Interactive Installation<em>·</em>New Media Art<em>·</em>Scenography<em>·</em></span>
-          <span>Lighting Design<em>·</em>Interactive Installation<em>·</em>New Media Art<em>·</em>Scenography<em>·</em></span>
+          <span>Lighting Design<em>·</em>Scenography<em>·</em>Interactive Installation<em>·</em>Real-time Visuals<em>·</em></span>
+          <span>Lighting Design<em>·</em>Scenography<em>·</em>Interactive Installation<em>·</em>Real-time Visuals<em>·</em></span>
         </div>
       </div>      </section>
       <!-- ================= SCROLL JOURNEY ================= -->
       <section class="journey" id="journey" aria-label="Scroll story">
         <div class="jy-sticky">
-          <div class="jy-ch l" id="jy1"><span class="n">Form</span><h3>Space begins<br>as a <em>model</em></h3><p>Every set starts as a built volume, drawn and tested in 3D before anyone touches a stage.</p></div>
-          <div class="jy-ch l" id="jy2"><span class="n">Light</span><h3>Light turns it<br>into <em>glass</em></h3><p>Beams, colour and reflection decide what the audience actually sees.</p></div>
-          <div class="jy-ch l" id="jy3"><span class="n">Stage</span><h3>Then it becomes<br>a <em>stage</em></h3><p>Scenography, lighting and new media, composed as one encounter.</p></div>
+          <div class="jy-ch l" id="jy1"><span class="n">01 / Lighting</span><h3>Light gives space<br>its <em>emotion.</em></h3><p>I work with colour, contrast and timing to shape atmosphere and guide attention.</p><p class="chapter-skill">Lighting programming · QuickShow · Cueing</p></div>
+          <div class="jy-ch l" id="jy2"><span class="n">02 / Scenography</span><h3>A world built<br>around <em>light.</em></h3><p>Through models, material and scale, I explore how a space might be encountered.</p><p class="chapter-skill">Maya · 3D modelling · Spatial exploration</p></div>
+          <div class="jy-ch l" id="jy3"><span class="n">03 / Interaction</span><h3>Your presence<br>changes the <em>scene.</em></h3><p>Real-time visuals and responsive light connect the environment to the people within it.</p><p class="chapter-skill">TouchDesigner · Arduino · Sensors · LED sync</p></div>
           <div class="jy-bar" id="jyBar"><i></i></div>
         </div>
       </section>
@@ -671,32 +685,18 @@
           <div class="seq-glow" id="seqGlow"></div>
           <div class="seq-ring" id="seqRing"></div>
           <div class="seq-words">
-            <div class="sw" role="heading" aria-level="2" style="--ty:50%">Scenography</div>
-            <div class="sw" role="heading" aria-level="2" style="--ty:60%">Light</div>
+            <div class="sw" role="heading" aria-level="2" style="--ty:50%">Lighting</div>
+            <div class="sw" role="heading" aria-level="2" style="--ty:60%">Scenography</div>
             <div class="sw" role="heading" aria-level="2" style="--ty:52%">Space</div>
           </div>
         </div>
       </section>
 
 
-      <!-- ================= PREVIOUS WORK ================= -->
-      <section class="prev sk" id="previous" aria-label="Software I work in">
-        <div class="sk-sticky">
-          <div class="sk-eyebrow">Tools of the trade</div>
-          <div class="prev-video">
-            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="A spiral reel of stills from previous work: VJ performance, Xing Yun stage concepts, Chao Feng print design, and the Federation Square screening"><source src="reel.webm" type="video/webm"></video>
-          </div>
-          <div class="sk-it r" data-k="0"><h3>Touch<em>Designer</em></h3><p><b>Real-time visuals.</b> Audio-reactive and generative systems, built as living networks for projection and live performance.</p></div>
-          <div class="sk-it l" data-k="1"><h3><em>Maya</em></h3><p><b>3D modelling.</b> Building stage volumes, props and spaces, so a set can be drawn and tested before it exists.</p></div>
-          <div class="sk-it r" data-k="2"><h3>Quick<em>Show</em></h3><p><b>Light programming.</b> Cueing colour, movement and timing so light moves with the piece.</p></div>
-          <div class="sk-it l" data-k="3"><h3>After <em>Effects</em></h3><p><b>Motion graphics.</b> 2 and 2.5D animation, layered depth and looping screen content.</p></div>
-        </div>
-      </section>
-
       <!-- ================= WORK ================= -->
       <section id="work" class="hx" aria-label="Selected work">
         <div class="hx-pin">
-          <div class="hx-head"><div><div class="eyebrow">Selected work</div><h2>Stage, light &amp; screen</h2></div></div>
+          <div class="hx-head"><div><div class="eyebrow">Selected work</div><h2>Light, space &amp; presence</h2></div></div>
           <div class="hx-track" id="hxTrack">
             <article class="hx-card" data-p="capitol">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Lighting Programming" data-cursor="view">
@@ -705,26 +705,12 @@
               </div>
               <div class="hx-meta"><span class="hx-n">RMIT Capitol Theatre</span><h3>Lighting <em>Programming</em></h3><span class="hx-sub">Immersive lighting installation, Melbourne</span></div>
             </article>
-            <article class="hx-card" data-p="vj">
-              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: VJing Performance" data-cursor="view">
-                <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><img class="hx-poster" src="https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><iframe class="hx-vid" data-kind="yt" data-id="O43imufUP-0" title="VJing performance preview" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe><span class="hx-tag">Click to open</span></div>
-              </div>
-              <div class="hx-meta"><span class="hx-n">Visual &amp; Sound Design</span><h3>VJing <em>Performance</em></h3><span class="hx-sub">TouchDesigner, synthesizer, live instrument, Maya</span></div>
-            </article>
             <article class="hx-card" data-p="lib">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Interactive Installation" data-cursor="view">
                 <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><div class="hx-ph"><div class="hx-ph-in"><i></i><span>Image &amp; video coming soon</span></div></div><span class="hx-tag">Click to open</span></div>
+                <div class="hx-frame"><img class="hx-fill campfire-cover" src="campfire-01.jpg" alt="Digital Interactive Campfire at RMIT Library" loading="lazy"><img class="hx-fill hx-alt" src="campfire-02.jpg" alt="Another view of the RMIT Library campfire installation" loading="lazy"><span class="hx-tag">Click to open</span></div>
               </div>
-              <div class="hx-meta"><span class="hx-n">RMIT Library</span><h3>Interactive <em>Installation</em></h3><span class="hx-sub">Digital campfire in RMIT Library</span></div>
-            </article>
-            <article class="hx-card" data-p="fed">
-              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Public Screening" data-cursor="view">
-                <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><img class="hx-fill" src="fedsquare-02.jpg" alt="Digitally composited statue garden artwork" loading="lazy"><img class="hx-fill hx-alt" src="fedsquare-01.jpg" alt="Iridescent glass sphere composition" loading="lazy"><span class="hx-tag">Click to open</span></div>
-              </div>
-              <div class="hx-meta"><span class="hx-n">Original work</span><h3>Public <em>Screening</em></h3><span class="hx-sub">Federation Square, Melbourne</span></div>
+              <div class="hx-meta"><span class="hx-n">RMIT Library</span><h3>Digital <em>Campfire</em></h3><span class="hx-sub">An invitation to remember, connect and let go</span></div>
             </article>
             <article class="hx-card" data-p="model">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: 3D Modelling" data-cursor="view">
@@ -732,6 +718,20 @@
                 <div class="hx-frame"><img class="hx-fill" src="model-1.jpg" alt="Glass pavilion garden, 3D model, wide view" loading="lazy"><img class="hx-fill hx-alt" src="model-3.jpg" alt="Pavilion on a lantern stand, close view" loading="lazy"><span class="hx-tag">Click to open</span></div>
               </div>
               <div class="hx-meta"><span class="hx-n">Environment design</span><h3>3D <em>Modelling</em></h3><span class="hx-sub">Glass pavilion garden, modelled in Maya</span></div>
+            </article>
+            <article class="hx-card" data-p="vj">
+              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: VJing Performance" data-cursor="view">
+                <div class="hx-glow" aria-hidden="true"></div>
+                <div class="hx-frame"><img class="hx-poster" src="https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><iframe class="hx-vid" data-kind="yt" data-id="O43imufUP-0" title="VJing performance preview" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe><span class="hx-tag">Click to open</span></div>
+              </div>
+              <div class="hx-meta"><span class="hx-n">Visual &amp; Sound Design</span><h3>VJing <em>Performance</em></h3><span class="hx-sub">TouchDesigner, synthesizer, live instrument, Maya</span></div>
+            </article>
+            <article class="hx-card" data-p="fed">
+              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Public Screening" data-cursor="view">
+                <div class="hx-glow" aria-hidden="true"></div>
+                <div class="hx-frame"><img class="hx-fill" src="fedsquare-02.jpg" alt="Digitally composited statue garden artwork" loading="lazy"><img class="hx-fill hx-alt" src="fedsquare-01.jpg" alt="Iridescent glass sphere composition" loading="lazy"><span class="hx-tag">Click to open</span></div>
+              </div>
+              <div class="hx-meta"><span class="hx-n">Original work</span><h3>Public <em>Screening</em></h3><span class="hx-sub">Federation Square, Melbourne</span></div>
             </article>
             <article class="hx-card" data-p="cf">
               <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Chao Feng Concert" data-cursor="view">
@@ -745,6 +745,21 @@
           <div class="hx-rip" id="hxRip" aria-hidden="true"></div>
         </div>
       </section>
+      <!-- ================= PREVIOUS WORK ================= -->
+      <section class="prev sk" id="previous" aria-label="Software I work in">
+        <div class="sk-sticky">
+          <div class="sk-eyebrow">Tools of the trade</div>
+          <div class="prev-video">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="A spiral reel of stills from previous work: VJ performance, Xing Yun stage concepts, Chao Feng print design, and the Federation Square screening"><source src="reel.webm.mp4" type="video/mp4"></video>
+          </div>
+          <div class="sk-it r" data-k="0"><h3>Touch<em>Designer</em></h3><p><b>Real-time visuals.</b> Audio-reactive and generative systems, built as living networks for projection and live performance.</p></div>
+          <div class="sk-it l" data-k="1"><h3><em>Maya</em></h3><p><b>3D modelling.</b> Building stage volumes, props and spaces, so a set can be drawn and tested before it exists.</p></div>
+          <div class="sk-it r" data-k="2"><h3>Quick<em>Show</em></h3><p><b>Light programming.</b> Cueing colour, movement and timing so light moves with the piece.</p></div>
+          <div class="sk-it l" data-k="3"><h3>After <em>Effects</em></h3><p><b>Motion graphics.</b> 2 and 2.5D animation, layered depth and looping screen content.</p></div>
+        </div>
+      </section>
+
+
 
       <!-- project page (opens over the site) -->
       <div class="proj" id="proj" role="dialog" aria-modal="true" aria-label="Project" hidden data-lenis-prevent>
@@ -760,7 +775,7 @@
             <div class="foot-name">Let's work<br>on something.</div>
           </div>
         </div>
-        <div class="foot-copy">Sharon Yii Zhi Ti — New Media Scenographer. Melbourne / Kuala Lumpur, 2026.</div>
+        <div class="foot-copy">Sharon Yii Zhi Ti — Lighting &amp; Scenography. Melbourne / Kuala Lumpur, 2026.</div>
         <div class="foot-stage">
           <video class="foot-leak" autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-hidden="true"><source src="leak.webm" type="video/webm"></video>
           <ul class="contact">
@@ -1238,8 +1253,10 @@
       body: ['Responsible for visual design and sound design for an immersive VJ performance exploring the relationship between contemporary digital media and Chinese cultural elements &mdash; using TouchDesigner, a sound synthesizer and live instrument playing, with 3D modelling in Maya.'],
       facts: [['Role', 'Visual &amp; sound design'], ['Tools', 'TouchDesigner, Maya, synthesizer'], ['Format', 'Live VJ performance']],
       vid: { kind: 'yt', id: 'O43imufUP-0', url: 'https://www.youtube.com/watch?v=O43imufUP-0', poster: 'https://i.ytimg.com/vi/O43imufUP-0/hqdefault.jpg', cta: 'Watch on YouTube' } },
-    lib: { kick: 'RMIT Library', title: 'Interactive <em>Installation</em>',
-      body: ['Digital campfire in RMIT Library.', 'Image, video and description to come.'], facts: [['Venue', 'RMIT Library'], ['Format', 'Interactive installation']] },
+    lib: { kick: 'RMIT Library · Interactive installation', title: 'Digital <em>Campfire</em>',
+      body: ['An invitation to pause, remember and let go. Created for RMIT Library, this digital interactive campfire invites visitors to write a message to someone they love or miss, or put a worry into words and symbolically burn it away.', 'The experience begins with discovery: the first person to encounter the installation ignites the campfire. Their presence turns an unlit installation into a shared gathering point.', 'My contribution connected the visual and physical experience: I created the real-time campfire visuals in TouchDesigner, worked with PIR motion detection and ultrasonic sensing using Arduino IDE, synchronised the LED strip, and contributed to the installation setup.', 'This project brings together my interests in lighting and scenography: using responsive light and a familiar gathering ritual to give a space an emotional purpose.'],
+      facts: [['Context', 'Created for RMIT Library'], ['Contribution', 'Real-time visuals, sensing, LED synchronisation & setup'], ['Tools', 'TouchDesigner, Arduino IDE, PIR & ultrasonic sensors'], ['Format', 'Digital interactive installation']],
+      imgs: [['campfire-01.jpg', 'Digital Interactive Campfire at RMIT Library', 'wide'], ['campfire-02.jpg', 'The campfire installation in its library setting', 'wide']] },
     fed: { kick: 'Original work', title: 'Public <em>Screening</em>',
       body: ['Original work presented at Federation Square, Melbourne. Developed an endless-loop visual journey exploring the principle of paradox, combining 3D modelling and 2.5D animation to create a continuously evolving digital environment. The work explores how opposing ideas can coexist within a single visual experience.'],
       facts: [['Venue', 'Federation Square, Melbourne'], ['Techniques', '3D modelling, 2.5D animation'], ['Format', 'Endless-loop screening']],
@@ -2006,7 +2023,8 @@
   function journeyP(){
     if(!journeyEl) return Math.min(Math.max(window.scrollY / (window.innerHeight * 0.95), 0), 1);
     var r = journeyEl.getBoundingClientRect(), top = r.top + window.scrollY, T = top + r.height - window.innerHeight;
-    return Math.min(Math.max(window.scrollY / Math.max(T, 1), 0), 1);
+    var introH = document.getElementById("light-prologue").offsetHeight;
+    return Math.min(Math.max((window.scrollY - introH) / Math.max(T - introH, 1), 0), 1);
   }
   // keyframes along the scroll: x (fraction of aspect), y, size multiplier, extra yaw, extra pitch
   var KF = [[0, 0.84, -0.36, 1.45, 0.00, 0.22, 0.00, 24], [0.14, 0.76, -0.22, 1.85, 0.32, 0.16, 0.02, 26], [0.30, 0.58, -0.08, 1.25, -0.28, 0.18, 0.00, 20], [0.48, 0.42, 0.00, 2.35, 0.22, 0.14, 0.00, 24], [0.62, 0.30, 0.00, 3.10, -0.05, 0.12, 0.00, 26], [0.78, 0.10, 0.00, 5.80, 0.00, 0.08, 0.0, 24], [0.90, 0.00, 0.00, 12.0, 0.00, 0.05, 0.0, 24], [1.0, 0.0, 0.00, 20.0, 0.00, 0.0, 0.0, 24]];
@@ -2384,6 +2402,8 @@
   }
   function onScroll(){
     var o = journeyEl ? Math.min(Math.max((1 - journeyP()) / 0.08, 0), 1) : Math.min(Math.max(1 - window.scrollY / (window.innerHeight * 0.85), 0), 1);
+    var introH = document.getElementById("light-prologue").offsetHeight;
+    o *= Math.min(Math.max((window.scrollY - introH + window.innerHeight) / (window.innerHeight * 0.5), 0), 1);
     cv.style.setProperty('--vo', o.toFixed(3));
     visible = o > 0.002; A.vis = o;
     if(typeof vid !== 'undefined'){ if(visible && vid.paused && !document.hidden) vidStart(); else if(!visible && !vid.paused) vid.pause(); }
@@ -2397,3 +2417,5 @@
 })();
 </script>
 
+
+<script src="portfolio-update.js"></script>
