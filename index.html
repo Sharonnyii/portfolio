@@ -1620,10 +1620,10 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   if(!cv || !window.THREE) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var renderer;
-  try{ renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: false, alpha: false, powerPreference: 'high-performance' }); }
+  try{ renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: false, powerPreference: 'high-performance' }); }
   catch(e){ return; }
   var coarse = window.matchMedia('(pointer:coarse)').matches;
-  var DPR = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 1.5);
+  var DPR = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 2);
   renderer.setPixelRatio(DPR);
   renderer.setClearColor(0xd9d2f3, 1);
   cv.classList.add('on');
@@ -1847,7 +1847,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       '  gl_FragColor = vec4(c, 1.0);',
       '}'
     ].join('\n') });
-  new THREE.TextureLoader().load('nebula.jpg', function(tx){ tx.minFilter = THREE.LinearFilter; tx.generateMipmaps = false; vidMat.uniforms.uNeb.value = tx; vidMat.uniforms.uNebOn.value = 1; });
+  new THREE.TextureLoader().load('nebula.webp', function(tx){ tx.minFilter = THREE.LinearFilter; tx.generateMipmaps = false; vidMat.uniforms.uNeb.value = tx; vidMat.uniforms.uNebOn.value = 1; });
   var vidScene = new THREE.Scene(); vidScene.add(new THREE.Mesh(quadGeo, vidMat));
   function vidStart(){ var p = vid.play(); if(p && p.catch) p.catch(function(){}); }
   vid.addEventListener('loadeddata', function(){ if(vid.videoWidth > 0){ vidReady = true; vidMat.uniforms.uVidAsp.value = vid.videoWidth / vid.videoHeight; } });
@@ -1963,7 +1963,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     '    vec3 pa = abs(N); vec2 pu = pa.z > pa.x && pa.z > pa.y ? p.xy : (pa.x > pa.y ? p.zy : p.xz);',
     '    vec3 t2 = texture2D(uTex, fract(pu*0.35 + 0.5 + vec2(uTime*0.006, 0.0))).rgb;',
     '    vec3 nb = mix(t1, t2, 0.45);',
-    '    col = mix(col, nb*1.18 + 0.03, (0.64 - 0.20*edge) * uA);',
+    '    col = mix(col, nb*1.18 + 0.03, (0.38 - 0.12*edge) * uA);',
     '  }',
     '  col += texture2D(uFog, uv - R.xy*0.30).rgb * fres * 0.55;',
     '  vec3 H = normalize(normalize(vec3(-0.45,0.65,0.62)) + V);',
@@ -1987,7 +1987,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     var CDN3 = 'libs/';
     function ls(src, next){ var sc = document.createElement('script'); sc.src = src; sc.onload = next; sc.onerror = function(){ window.__modelErr = src; }; document.head.appendChild(sc); }
     function getBuf(){
-      return fetch('pavilion.glb').then(function(r){ if(!r.ok) throw 0; return r.arrayBuffer(); }).catch(function(){
+      return fetch('pavilion-static.glb').then(function(r){ if(!r.ok) throw 0; return r.arrayBuffer(); }).catch(function(){
         return fetch('pavilion.b64.txt').then(function(r){ if(!r.ok) throw 0; return r.text(); }).then(function(t){
           var bin = atob(t.trim()), u = new Uint8Array(bin.length); for(var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer;
         });
@@ -2026,8 +2026,8 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
         });
       })();
       glassMat.uniforms.uK.value = 3.0 / modelDim;
-      if(g.animations && g.animations.length && !reduce){ mixer = new THREE.AnimationMixer(rootObj); mixer.clipAction(g.animations[0]).play(); }
-      new THREE.TextureLoader().load('nebula.jpg', function(tx){ tx.wrapS = tx.wrapT = THREE.MirroredRepeatWrapping; tx.minFilter = THREE.LinearMipmapLinearFilter; tx.encoding = THREE.LinearEncoding; glassMat.uniforms.uTex.value = tx; glassMat.uniforms.uTexOn.value = 1; });
+      // Static GLB: scroll controls the holder; no embedded animation playback.
+      new THREE.TextureLoader().load('nebula.webp', function(tx){ tx.wrapS = tx.wrapT = THREE.MirroredRepeatWrapping; tx.minFilter = THREE.LinearMipmapLinearFilter; tx.encoding = THREE.LinearEncoding; tx.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy()); glassMat.uniforms.uTex.value = tx; glassMat.uniforms.uTexOn.value = 1; });
       modelReady = true; modelT0 = performance.now();
       window.__portfolioModelReady = true; window.dispatchEvent(new Event('portfolio-model-ready'));
       if(reduce) frame(performance.now(), true);
@@ -2073,16 +2073,16 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     var ea = 1 - Math.pow(1 - modelAlpha, 3);
     var mx = mouse.x - 0.5, my = mouse.y - 0.5;
     var kf = keyAt(sProg);
-    var yaw = -0.35 + Math.sin(tt * 0.12) * 0.12 + spinY + kf[4] + mx * 0.45;
+    var yaw = -0.35 + spinY + kf[4] + mx * 0.45;
     var pitch = 0.04 - my * 0.20 + spinX + kf[5];
     var fz = Math.min(Math.max((sProg - 0.55) / 0.3, 0), 1); fz = fz * fz * (3 - 2 * fz);
-    holder.rotation.set(Math.max(-0.9, Math.min(0.9, pitch)) * (1 - fz), yaw * (1 - fz), (kf[6] + 0.015 * Math.sin(tt * 0.4)) * (1 - fz), 'YXZ');
+    holder.rotation.set(Math.max(-0.9, Math.min(0.9, pitch)) * (1 - fz), yaw * (1 - fz), kf[6] * (1 - fz), 'YXZ');
     var fv = kf[7]; if(Math.abs(cam.fov - fv) > 0.01){ cam.fov = fv; cam.position.z = 1 / Math.tan(fv * Math.PI / 360); cam.updateProjectionMatrix(); }
     var narrow = asp < 0.9;
     var base = narrow ? 1.6 : 2.3;
     holder.scale.setScalar((base * (0.90 + 0.10 * ea) * kf[3]) / modelDim);
     var kx = narrow ? kf[1] * 0.25 : kf[1];
-    holder.position.set(kx * asp + par.x * asp * 0.4, (narrow ? 0.30 : 0) + kf[2] + par.y * 0.4 + Math.sin(tt * 0.5) * 0.02, 0);
+    holder.position.set(kx * asp + par.x * asp * 0.4, (narrow ? 0.30 : 0) + kf[2] + par.y * 0.4, 0);
     // final approach: line the cloud-shaped window up with the screen centre and fly through it
     var wf = Math.min(Math.max((sProg - 0.50) / 0.36, 0), 1); wf = wf * wf * (3 - 2 * wf);
     if(wf > 0 && rootObj){
