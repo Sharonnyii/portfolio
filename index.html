@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>
 document.documentElement.classList.add('site-loading');
 window.__loaderSafety = setTimeout(function(){ document.documentElement.classList.remove('site-loading'); var loader=document.getElementById('siteLoader'); if(loader) loader.remove(); }, 6000);
@@ -619,6 +619,8 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   .copybtn{background:none;border:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:11px;padding:4px 9px;cursor:pointer;margin-left:8px;text-transform:uppercase;letter-spacing:.05em}
   .copybtn:hover{border-color:var(--accent);color:var(--accent)}
 </style>
+
+<link rel="stylesheet" href="mobile.css?v=20261022-1">
 
 <div class="site-loader" id="siteLoader" role="status" aria-label="Loading Sharon Yii portfolio">
   <div class="loader-emblem" aria-hidden="true"><div class="loader-symbol"><img src="sharon-symbol-glass.png" alt="" width="1587" height="2245"></div><div class="loader-symbol loader-reveal"><img src="sharon-symbol-glass.png" alt="" width="1587" height="2245"></div></div>
@@ -1293,7 +1295,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     var fr = document.getElementById('projFrame');
     if(fr && d.vid){
       fr.src = fr.getAttribute('src') || (d.vid.kind === 'vimeo' ? 'https://player.vimeo.com/video/' + d.vid.id + '?autoplay=1&title=0&byline=0&portrait=0&dnt=1' : 'https://www.youtube.com/embed/' + d.vid.id + '?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1');
-      if(d.vid.kind === 'vimeo') loadVimeoSDK(function(){ try{ var mainPlayer = new Vimeo.Player(fr); mainPlayer.ready().then(function(){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; if(id === 'capitol' && window.setupCapitolAmbient) proj.__ambientCleanup = window.setupCapitolAmbient(fr, mainPlayer); }); }catch(e){} });
+      if(d.vid.kind === 'vimeo') loadVimeoSDK(function(){ try{ var mainPlayer = new Vimeo.Player(fr); mainPlayer.ready().then(function(){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; if(id === 'capitol' && !matchMedia('(max-width:760px)').matches && window.setupCapitolAmbient) proj.__ambientCleanup = window.setupCapitolAmbient(fr, mainPlayer); }); }catch(e){} });
       else { fr.addEventListener('load', function(){ try{ fr.contentWindow.postMessage(JSON.stringify({ event: 'listening', id: 2 }), '*'); }catch(e){} });
         var onm = function(e){ if(e.source !== fr.contentWindow) return; var m = e.data; try{ if(typeof m === 'string') m = JSON.parse(m); }catch(x){ return; } if(m && m.event === 'onError'){ fr.classList.remove('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'auto'; } else if(m && ((m.event === 'onStateChange' && m.info === 1) || (m.event === 'infoDelivery' && m.info && m.info.playerState === 1 && m.info.currentTime > 0))){ fr.classList.add('ready'); fr.parentNode.querySelector('a.pp').style.pointerEvents = 'none'; } };
         window.addEventListener('message', onm); }
@@ -1609,7 +1611,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   try{ renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: false, powerPreference: 'high-performance' }); }
   catch(e){ return; }
   var coarse = window.matchMedia('(pointer:coarse)').matches;
-  var DPR = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 2);
+  var DPR = Math.min(window.devicePixelRatio || 1, coarse ? 1 : 2);
   renderer.setPixelRatio(DPR);
   renderer.setClearColor(0xd9d2f3, 1);
   cv.classList.add('on');
@@ -2440,3 +2442,5 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 <script src="reflection-interactions.js"></script>
 
 <script src="skills-reel.js"></script>
+
+<script src="mobile.js?v=20261022-1"></script>
