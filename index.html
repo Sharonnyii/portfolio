@@ -261,7 +261,6 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   .hx-track{--mh:clamp(220px,46vh,520px);display:flex;align-items:flex-start;gap:clamp(28px,4vw,72px);padding-inline:var(--gutter,clamp(20px,5vw,64px));width:max-content;will-change:transform;flex:none}
   .hx-card{flex:none}
   .hx-media{position:relative;height:var(--mh);aspect-ratio:16/9;cursor:pointer;outline:none;border-radius:8px;transition:transform .7s cubic-bezier(.16,1,.3,1)}
-  .hx-card:nth-child(6) .hx-media{aspect-ratio:902/1280;height:var(--mh)}
   .hx-media:hover,.hx-media:focus-visible{transform:scale(1.045)}
   .hx-media:focus-visible{box-shadow:0 0 0 2px var(--accent)}
   .hx-frame{position:absolute;inset:0;border-radius:8px;overflow:hidden;background:radial-gradient(ellipse at 30% 20%,rgba(120,110,255,.5),rgba(5,6,13,0) 60%),radial-gradient(ellipse at 80% 90%,rgba(255,120,200,.35),rgba(5,6,13,0) 60%),#07091a;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 24px 60px rgba(0,0,0,.5);transition:box-shadow .6s}
@@ -280,7 +279,6 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   .hx-ph-in{text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
   .hx-ph-in i{display:block;margin:0 auto 14px;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffb36b 45%,#ff5a3c);box-shadow:0 0 30px rgba(255,140,70,.6)}
   .hx-meta{margin-top:clamp(14px,2.2vh,22px);max-width:min(46vw,640px)}
-  .hx-card:nth-child(6) .hx-meta{max-width:calc(var(--mh) * 902 / 1280)}
   .hx-n{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
   .hx-meta h3{font-family:var(--sans);font-weight:400;font-size:clamp(24px,2.9vw,46px);line-height:1;letter-spacing:-.035em;transition:text-shadow .5s}
   .hx-card:hover .hx-meta h3{text-shadow:0 0 18px rgba(200,215,255,.55),0 0 54px rgba(130,150,255,.4)}
@@ -297,7 +295,6 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     .hx-track{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;--mh:clamp(180px,30vh,320px)}
     .hx-card{scroll-snap-align:start}
     .hx-media{height:auto;width:min(82vw,560px)}
-    .hx-card:nth-child(6) .hx-media{width:min(60vw,360px)}
     .hx-meta{max-width:82vw}
     .hx-tag{opacity:1;transform:none}
     .hx-prog,.hx-rip{display:none}
@@ -734,20 +731,6 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
                 <div class="hx-frame"><img class="hx-fill" src="model-1.jpg" alt="Glass pavilion garden, 3D model, wide view" loading="lazy"><img class="hx-fill hx-alt" src="model-3.jpg" alt="Pavilion on a lantern stand, close view" loading="lazy"><span class="hx-tag">Click to open</span></div>
               </div>
               <div class="hx-meta"><h3>3D <em>Modelling</em></h3><span class="hx-sub">Glass pavilion garden, modelled in Maya</span></div>
-            </article>
-            <article class="hx-card" data-p="fed">
-              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Public Screening" data-cursor="view">
-                <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><img class="hx-fill" src="fedsquare-02.jpg" alt="Digitally composited statue garden artwork" loading="lazy"><img class="hx-fill hx-alt" src="fedsquare-01.jpg" alt="Iridescent glass sphere composition" loading="lazy"><span class="hx-tag">Click to open</span></div>
-              </div>
-              <div class="hx-meta"><h3>Public <em>Screening</em></h3><span class="hx-sub">Federation Square, Melbourne</span></div>
-            </article>
-            <article class="hx-card" data-p="cf">
-              <div class="hx-media" role="button" tabindex="0" aria-label="Open project page: Chao Feng Concert" data-cursor="view">
-                <div class="hx-glow" aria-hidden="true"></div>
-                <div class="hx-frame"><img class="hx-fill hx-contain" src="cf-collage.jpg" alt="Chao Feng 43rd Anniversary Concert: poster, programme booklet, ticket and handout" loading="lazy"><span class="hx-tag">Click to open</span></div>
-              </div>
-              <div class="hx-meta"><h3>Chao Feng <em>Concert</em></h3><span class="hx-sub">Chao Feng Chinese Orchestra &mdash; booklet, poster, ticket &amp; handout</span></div>
             </article>
           </div>
           <div class="hx-prog" aria-hidden="true"><i id="hxBar"></i></div>
@@ -1275,19 +1258,11 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       body: ['An interactive installation inviting students to pause, write and let go. A message to someone loved or missed. A worry held quietly, waiting to be released.', 'Words become an offering to the fire. Together, we gather around and ignite the campfire, allowing light to hold what is difficult to say. For a moment, the library becomes a place of warmth, remembrance and shared presence.'],
       facts: [['Client', 'RMIT Library'], ['Contribution', 'TouchDesigner real-time campfire visuals; PIR motion and ultrasonic sensing programmed in Arduino IDE; LED strip synchronisation; installation setup'], ['Tools', 'TouchDesigner, Arduino IDE, PIR & ultrasonic sensors'], ['Format', 'Digital interactive installation']],
       behind: [['campfire-bts-01.jpg', 'Beyond the Flame — behind the scenes, photograph 1'], ['campfire-bts-02.jpg', 'Beyond the Flame — behind the scenes, photograph 2'], ['campfire-bts-03.jpg', 'Campfire construction with paper forms, wood shavings and wiring'], ['campfire-01.jpg', 'Digital Interactive Campfire at RMIT Library'], ['campfire-02.jpg', 'The campfire installation in its library setting']] },
-    fed: { kick: 'Original work', title: 'Public <em>Screening</em>',
-      body: ['Original work presented at Federation Square, Melbourne. Developed an endless-loop visual journey exploring the principle of paradox, combining 3D modelling and 2.5D animation to create a continuously evolving digital environment. The work explores how opposing ideas can coexist within a single visual experience.'],
-      facts: [['Venue', 'Federation Square, Melbourne'], ['Techniques', '3D modelling, 2.5D animation'], ['Format', 'Endless-loop screening']],
-      imgs: [['fedsquare-02.jpg', 'Digitally composited statue garden artwork', 1], ['fedsquare-01.jpg', 'Iridescent glass sphere composition', 1]] },
     model: { kick: 'Environment design', title: '3D <em>Modelling</em>',
       sketchfab: '19614851641a48b6b02ded05f9dba9cb',
       body: ['This Chinese diorama explores the concept of cultural synthesis. It reflects an ongoing effort to fuse my core cultural identity, deeply shaped by the harmonies of a Chinese orchestra, with the modern digital elements that surround and define me.'],
       facts: [['Tool', 'Maya'], ['Format', '3D environment']],
-      imgs: [['model-1.jpg', 'Glass pavilion garden, wide view', 'wide'], ['model-2.jpg', 'Pavilion and cloud window, close view', 'wide'], ['model-3.jpg', 'Pavilion on its stand, closer view', 'wide'], ['model-4.jpg', 'Glass lantern stand with light orbs'], ['model-5.jpg', 'Pavilion interior with brick steps'], ['model-6.jpg', 'Pavilion front in glass render']] },
-    cf: { kick: 'Graphic Designer', title: 'Chao Feng <em>Concert</em>',
-      body: ['Responsible for the design of concert booklets, posters, tickets and handouts, developing a cohesive visual identity across the concert&rsquo;s communication and audience materials.'],
-      facts: [['Client', 'Chao Feng Chinese Orchestra'], ['Role', 'Graphic designer'], ['Deliverables', 'Booklet, poster, ticket, handout']],
-      imgs: [['cf-collage.jpg', 'Chao Feng 43rd Anniversary Concert: poster, programme booklet, ticket and handout', 'solo']] }
+      imgs: [['model-1.jpg', 'Glass pavilion garden, wide view', 'wide'], ['model-2.jpg', 'Pavilion and cloud window, close view', 'wide'], ['model-3.jpg', 'Pavilion on its stand, closer view', 'wide'], ['model-4.jpg', 'Glass lantern stand with light orbs'], ['model-5.jpg', 'Pavilion interior with brick steps'], ['model-6.jpg', 'Pavilion front in glass render']] }
   };
   var proj = document.getElementById('proj'), projIn = document.getElementById('projIn'), projClose = document.getElementById('projClose'), lastFocus = null;
   function videoCTA(v){
