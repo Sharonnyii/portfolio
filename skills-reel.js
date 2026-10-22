@@ -2,13 +2,6 @@
 (function(){
  var section=document.getElementById('previous'),video=document.getElementById('skillsReel');if(!section||!video)return;
  var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- if(matchMedia('(max-width:760px)').matches){
-  video.loop=true;var active=false;
-  function mobilePlay(){if(active&&!document.hidden&&!reduced){var p=video.play();if(p)p.catch(function(){});}else video.pause();}
-  new IntersectionObserver(function(e){active=e[0].isIntersecting;mobilePlay();},{threshold:.1}).observe(video);
-  document.addEventListener('visibilitychange',mobilePlay);
-  window.updateSkillReel=function(){};return;
- }
 
  var target=0,visible=false,raf=0,lastSeek=0,ready=false;
  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}

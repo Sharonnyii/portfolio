@@ -620,7 +620,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
   .copybtn:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 
-<link rel="stylesheet" href="mobile.css?v=20261022-1">
+<link rel="stylesheet" href="mobile.css?v=20261022-2">
 
 <div class="site-loader" id="siteLoader" role="status" aria-label="Loading Sharon Yii portfolio">
   <div class="loader-emblem" aria-hidden="true"><div class="loader-symbol"><img src="sharon-symbol-glass.png" alt="" width="1587" height="2245"></div><div class="loader-symbol loader-reveal"><img src="sharon-symbol-glass.png" alt="" width="1587" height="2245"></div></div>
@@ -1046,7 +1046,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       var t = clamp(p * 3 - k, 0, 1);
       if(k === 0) t = clamp(p * 3 + 0.08, 0, 1);
       var caption = seq.querySelector('[data-chapter="' + k + '"]');
-      if(caption) caption.style.opacity = (sm((t - 0.025) / 0.11) * (1 - sm((t - 0.91) / 0.08))).toFixed(3);
+      if(caption){ var captionOpacity = (sm((t - 0.025) / 0.11) * (1 - sm((t - 0.91) / 0.08))).toFixed(3); caption.style.opacity = captionOpacity; caption.style.setProperty('--mobile-caption', captionOpacity); }
       var ch = words[k]._ch, n = ch.length;
       for(var i = 0; i < n; i++){
         var pos = n > 1 ? i / (n - 1) : 0;
@@ -2443,4 +2443,4 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
 
 <script src="skills-reel.js"></script>
 
-<script src="mobile.js?v=20261022-1"></script>
+<script src="mobile.js?v=20261022-2"></script>
