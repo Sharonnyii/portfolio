@@ -1912,15 +1912,16 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     '  float fb = vn(vec3(p.x*34.0, p.y*5.0, p.z*34.0) + 11.0); float fr = 1.0 - sqrt((fb*2.0-1.0)*(fb*2.0-1.0) + 0.04);',
     '  return a*a*0.55 + b*0.22 + c*0.05 + fr*0.30;',
     '}',
+    'vec3 safeUnit(vec3 v, vec3 fallback){ float q = dot(v,v); return q > 1e-10 && q < 1e12 ? v * inversesqrt(q) : fallback; }',
     'void main(){',
     '  float nl0 = length(vN); vec3 N = nl0 > 1e-4 ? vN / nl0 : vec3(0.0, 0.0, 1.0); if(!gl_FrontFacing) N = -N;',
-    '  vec3 V = normalize(-vVP);',
+    '  vec3 V = safeUnit(-vVP, vec3(0.0,0.0,1.0));',
     '  vec3 p = vOP * uK;',
     '  float h = relief(p);',
     '  float e = 0.02;',
     '  vec3 gR = vec3(relief(p+vec3(e,0.0,0.0))-h, relief(p+vec3(0.0,e,0.0))-h, relief(p+vec3(0.0,0.0,e))-h)/e;',
     '  vec3 gV = uR * gR; gV -= N*dot(gV, N);',
-    '  N = normalize(N - 0.045*gV);',
+    '  N = safeUnit(N - 0.045*gV, vec3(0.0,0.0,1.0));',
     '  float ndv = clamp(dot(N, V), 0.0, 1.0);',
     '  float edge = pow(1.0 - ndv, 1.5);',
     '  vec2 uv = gl_FragCoord.xy / uRes;',
@@ -1954,9 +1955,9 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     '    col = mix(col, nb*1.18 + 0.03, (0.38 - 0.12*edge) * uA);',
     '  }',
     '  col += texture2D(uFog, uv - R.xy*0.30).rgb * fres * 0.55;',
-    '  vec3 H = normalize(normalize(vec3(-0.45,0.65,0.62)) + V);',
-    '  vec3 H2 = normalize(normalize(vec3(0.55,-0.35,0.70)) + V);',
-    '  float sp = pow(max(dot(N,H),0.0), 120.0) + pow(max(dot(N,H),0.0), 16.0)*0.10 + pow(max(dot(N,H2),0.0), 50.0)*0.30;',
+    '  vec3 H = safeUnit(normalize(vec3(-0.45,0.65,0.62)) + V, N);',
+    '  vec3 H2 = safeUnit(normalize(vec3(0.55,-0.35,0.70)) + V, N);',
+    '  float sp = pow(clamp(dot(N,H),0.0,1.0), 120.0) + pow(clamp(dot(N,H),0.0,1.0), 16.0)*0.10 + pow(clamp(dot(N,H2),0.0,1.0), 50.0)*0.30;',
     '  col += vec3(1.0) * sp;',
     '  col += vec3(1.0,0.96,1.0) * smoothstep(0.72, 1.0, edge) * 0.30;',
     '  vec3 gcol = mix(vec3(0.70,0.62,1.0), vec3(0.62,0.90,1.0), 0.5 + 0.5*sin(h*5.0 + uTime*0.3)) + vec3(0.18,0.0,0.06)*sin(h*9.0);',
@@ -1964,7 +1965,7 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
     '  col += gcol * gl * 0.5 * uA;',                 // inner glow: feeds the bloom pass so edges and ridges shine
     '  col = mix(col, bg*1.15 + 0.04, 0.18*(1.0-edge));',  // more of the scene shows through the body
     '  col += (h31(vec3(gl_FragCoord.xy*0.9, uTime)) - 0.5) * 0.02;',
-    '  col = clamp(col, 0.0, 3.0); if(col.r != col.r || col.g != col.g || col.b != col.b) col = bg;',
+    '  if(!(col.r >= -100.0 && col.r <= 100.0 && col.g >= -100.0 && col.g <= 100.0 && col.b >= -100.0 && col.b <= 100.0)) col = mix(bg, vec3(0.50,0.55,0.85),0.35); col = clamp(col, 0.0, 1.25);',
     '  gl_FragColor = vec4(mix(bg, col, uA), 1.0);',
     '}'
   ].join('\n');
@@ -2015,7 +2016,16 @@ html.site-loading .site-loader{display:grid;position:fixed;inset:0;z-index:10000
       })();
       glassMat.uniforms.uK.value = 3.0 / modelDim;
       // Static GLB: scroll controls the holder; no embedded animation playback.
-      new THREE.TextureLoader().load('nebula.webp', function(tx){ tx.wrapS = tx.wrapT = THREE.MirroredRepeatWrapping; tx.minFilter = THREE.LinearMipmapLinearFilter; tx.encoding = THREE.LinearEncoding; tx.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy()); glassMat.uniforms.uTex.value = tx; glassMat.uniforms.uTexOn.value = 1; });
+      function applyModelTexture(tx){
+        // Clamp/linear sampling also works for non-power-of-two images in WebGL 1.
+        tx.wrapS = tx.wrapT = THREE.ClampToEdgeWrapping; tx.minFilter = THREE.LinearFilter; tx.magFilter = THREE.LinearFilter; tx.generateMipmaps = false;
+        tx.encoding = THREE.LinearEncoding; tx.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
+        glassMat.uniforms.uTex.value = tx; glassMat.uniforms.uTexOn.value = 1; window.__modelTextureStatus = 'loaded';
+      }
+      var modelTextureLoader = new THREE.TextureLoader();
+      modelTextureLoader.load('nebula.webp', applyModelTexture, undefined, function(){
+        modelTextureLoader.load('nebula.jpg', applyModelTexture, undefined, function(){ window.__modelTextureStatus = 'fallback-shader'; });
+      });
       modelReady = true; modelT0 = performance.now();
       window.__portfolioModelReady = true; window.dispatchEvent(new Event('portfolio-model-ready'));
       if(reduce) frame(performance.now(), true);
