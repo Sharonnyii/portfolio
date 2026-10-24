@@ -107,3 +107,12 @@
 @media(max-width:760px) and (max-height:700px) and (prefers-reduced-motion:no-preference){#seq .seq-personal-copy{top:22%}#seq .editorial-lead{font-size:39px}#seq .editorial-body{font-size:17px}#previous .sk-it,#previous .sk-it.l,#previous .sk-it.r{top:61svh}#previous .sk-it h3{font-size:27px}}
 
 @media(max-width:760px){#work .hx-media.touch-active{box-shadow:0 0 24px #e8dbff55}#work .hx-track{scroll-behavior:smooth}}
+
+/* Legible captions continue to work when the 3D renderer is not ready. */
+@media(max-width:760px) and (prefers-reduced-motion:no-preference){
+ #journey.journey{height:360svh;position:relative;z-index:2}
+ #journey .jy-sticky{position:sticky;top:0;height:100svh;overflow:hidden}
+ #journey .model-statement{left:7vw;right:auto;bottom:calc(15svh + env(safe-area-inset-bottom));width:86vw;max-width:86vw;box-sizing:border-box;padding:18px 0;opacity:var(--phone-caption,0)!important;transform:translateY(calc((1 - var(--phone-caption,0))*14px))!important;filter:none;z-index:2;text-align:left;color:#fff;text-shadow:0 2px 8px #05070c,0 0 28px #05070ccc}
+ #journey .model-statement h3{font-size:clamp(28px,7.8vw,42px);line-height:1.18}
+ #journey .jy-sticky::before{content:"";position:absolute;inset:48% 0 0;pointer-events:none;background:linear-gradient(transparent,rgba(5,7,12,.55) 65%,rgba(5,7,12,.25))}
+}
